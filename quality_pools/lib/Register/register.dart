@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+
+
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,15 +39,83 @@ class RegisterPage extends StatelessWidget {
                 height: 1.5, // Adjust spacing between lines if needed
               ),
             ),
-            
-            const SizedBox(height: 20), // Add spacing between text and buttons
+           Form(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              
+                TextFormField(
+                 
+                  decoration: const InputDecoration(
+                    hintText: 'Please write a name',
+                  ),
+                
+                ),
+                const SizedBox(height: 30.0),]
+           )),
+           Form(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'Please write a username',
+                  ),
+                
+                ),
+                const SizedBox(height: 30.0),]
+           )),
+           Form(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                TextFormField(
+                 
+                  decoration: const InputDecoration(
+                    hintText: 'Please write a username',
+                  ),
+                
+                ),
+                const SizedBox(height: 30.0),]
+           )),
+           Form(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                TextFormField(
+                 
+                  decoration: const InputDecoration(
+                    hintText: 'Please write a username',
+                  ),
+                
+                ),
+                const SizedBox(height: 30.0),]
+           )),
+           Form(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                TextFormField(
+                 
+                  decoration: const InputDecoration(
+                    hintText: 'Please write a username',
+                  ),
+                
+                ),
+                const SizedBox(height: 30.0),]
+           )),
+             SizedBox(height: 20), // Add spacing between text and buttons
                 FilledButton(
                   style: FilledButton.styleFrom(
                     backgroundColor: Color(0XFF1A8CF0),
-                    minimumSize: const Size(200, 50),
+                    minimumSize: Size(200, 50),
                   ),
                   onPressed: () {
-                    
+                     Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RegisterPage(),
+              ),);
                   },
                   child: const Text('Continue'),
                 ),
