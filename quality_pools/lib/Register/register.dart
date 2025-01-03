@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/poolImage.dart';
+
 
 
 
@@ -114,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                      Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const RegisterPage(),
+                builder: (context) => const AddPoolImage(),
               ),);
                   },
                   child: const Text('Continue'),
