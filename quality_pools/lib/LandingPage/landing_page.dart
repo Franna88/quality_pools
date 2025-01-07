@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/CommonComponants/common_button.dart';
+import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
+import 'package:quality_pools/Login/loginPage.dart';
 import 'package:quality_pools/Register/register.dart';
+import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -25,49 +29,34 @@ class LandingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'QUALITY-POOLS-',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
-                height: 1.5, // Adjust spacing between lines if needed
-              ),
+            Spacer(),
+            QualityPoolHeader(),
+            Spacer(),
+
+            CommonButton(
+              buttonText: 'Login',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Loginpage(),
+                  ),
+                );
+              },
             ),
-            const SizedBox(height: 20), // Add spacing between text and buttons
-                FilledButton(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: Color(0XFF1A8CF0),
-                    minimumSize: const Size(200, 50)
+            const SizedBox(height: 20), // Space between the buttons
+            CommonButton(
+              buttonText: 'Sign Up',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterPage(),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterPage(),
-              ),);
-                  },
-                  child: const Text('Login'),
-
-                ),
-                const SizedBox(height: 20), // Space between the buttons
-                FilledButton(
-                  
-                   style: FilledButton.styleFrom(
-                    backgroundColor: Color(0XFF1A8CF0),
-                    minimumSize: const Size(200, 50),
-                  ),
-
-                  onPressed:(){
-                    Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RegisterPage(),
-              ),);
-                  },
-                  child: const Text('Sign Up'),
-                ),
-            
-            
+                );
+              },
+            ),
+            Spacer(),
           ],
         ),
       ),
