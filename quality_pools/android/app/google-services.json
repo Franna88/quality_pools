@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "433504568249",
+    "project_id": "quality-pools-2c750",
+    "storage_bucket": "quality-pools-2c750.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433504568249:android:16a2b21772dbcbba37ac68",
+        "android_client_info": {
+          "package_name": "com.app.quality_pools"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqol7HFU-wey0QVSZDd_gEGpCTSg0vDDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
