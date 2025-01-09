@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/pooIInfo.dart';
+import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
 
 
 
@@ -31,15 +33,7 @@ class _AddPoolImageState extends State<AddPoolImage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'QUALITY-POOLS-',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
-                height: 1.5, // Adjust spacing between lines if needed
-              ),
-            ),
-           
+            QualityPoolHeader(),
              SizedBox(height: 20), // Add spacing between text and buttons
                 FilledButton(
                   style: FilledButton.styleFrom(
@@ -50,7 +44,7 @@ class _AddPoolImageState extends State<AddPoolImage> {
                      Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddPoolImage(),
+                builder: (context) => const AddPoolInfo(),
               ),);
                   },
                   child: const Text('Continue'),

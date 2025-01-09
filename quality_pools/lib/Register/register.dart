@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
+import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
+import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
 
 
 
-
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
-  @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _cellPhoneNumber= TextEditingController();
+    final TextEditingController _homeAddress = TextEditingController();
+
+
+
+    //GlobalKey for form validation
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -30,99 +38,121 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'QUALITY-POOLS-',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
-                height: 1.5, // Adjust spacing between lines if needed
-              ),
+            SizedBox( height:30),
+            QualityPoolHeader(),
+           SizedBox( height:30),
+              SizedBox(
+                width: screenWidth * 0.8,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children:[
+                      ReusableTextField(
+                      hintText: 'Enter Email',
+                      controller: _emailController,
+                      labelText: 'Email',
+                      imagePath: 'images/email.png',
+                      validator: (value) {
+                        // Validate email on form submission
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter an email';
+                        }
+                        // Simple email regex validation
+                        final emailRegex = RegExp(
+                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                        if (!emailRegex.hasMatch(value)) {
+                          return 'Please enter a valid email address';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    ReusableTextField(
+                      hintText: '000 111 222 444',
+                      controller: _cellPhoneNumber,
+                      labelText: 'Cell Number',
+                      imagePath: 'images/password.png',
+                      obscureText: true,
+                      validator: (value) {
+                        // Validate password on form submission
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a cell number';
+                        } else if (value.length < 10) {
+                          return 'Cell Number must be at least 10 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                           ReusableTextField(
+                      hintText: 'Address Text',
+                      controller: _homeAddress,
+                      labelText: 'Address Text',
+                      imagePath: 'images/password.png',
+                      obscureText: true,
+                      validator: (value) {
+                        // Validate password on form submission
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a cell number';
+                        } else if (value.length < 10) {
+                          return 'Cell Number must be at least 10 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    SizedBox( height:20),
+                    ReusableTextField(
+                      hintText: '**************',
+                      controller: _passwordController,
+                      labelText: 'Password',
+                      imagePath: 'images/password.png',
+                      obscureText: true,
+                      validator: (value) {
+                        // Validate password on form submission
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        } else if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox( height:20),
+                    ReusableTextField(
+                      hintText: '**************',
+                      controller: _passwordController,
+                      labelText: 'Confirm Password',
+                      imagePath: 'images/password.png',
+                      obscureText: true,
+                      validator: (value) {
+                        // Validate password on form submission
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        } else if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                     SizedBox(height: 20), // Add spacing between text and buttons
+                        CommonButton(
+              buttonText: 'Continue',
+              onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddPoolImage(),
+                    ),);
+              },
             ),
-           Form(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              
-                TextFormField(
-                 
-                  decoration: const InputDecoration(
-                    hintText: 'Please write a name',
-                  ),
-                
-                ),
-                const SizedBox(height: 30.0),]
-           )),
-           Form(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'Please write a username',
-                  ),
-                
-                ),
-                const SizedBox(height: 30.0),]
-           )),
-           Form(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-                TextFormField(
-                 
-                  decoration: const InputDecoration(
-                    hintText: 'Please write a username',
-                  ),
-                
-                ),
-                const SizedBox(height: 30.0),]
-           )),
-           Form(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-                TextFormField(
-                 
-                  decoration: const InputDecoration(
-                    hintText: 'Please write a username',
-                  ),
-                
-                ),
-                const SizedBox(height: 30.0),]
-           )),
-           Form(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-                TextFormField(
-                 
-                  decoration: const InputDecoration(
-                    hintText: 'Please write a username',
-                  ),
-                
-                ),
-                const SizedBox(height: 30.0),]
-           )),
-             SizedBox(height: 20), // Add spacing between text and buttons
-                FilledButton(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: Color(0XFF1A8CF0),
-                    minimumSize: Size(200, 50),
-                  ),
-                  onPressed: () {
-                     Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddPoolImage(),
-              ),);
-                  },
-                  child: const Text('Continue'),
-                ),
-          
-            
+                    ]
+                  )
+
+                  ),)
             
           ],
         ),
