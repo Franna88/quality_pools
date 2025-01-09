@@ -35,6 +35,17 @@ class _AddPoolImageState extends State<AddPoolImage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             QualityPoolHeader(),
+                SizedBox(height: 20), // Add spacing between text and buttons
+                            CommonButton(
+              buttonText: 'Select Image',
+              onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddPoolInfo(),
+                    ),);
+              },
+            ),
              SizedBox(height: 20), // Add spacing between text and buttons
                             CommonButton(
               buttonText: 'Continue',

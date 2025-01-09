@@ -77,7 +77,7 @@ class AddPoolInfo extends StatelessWidget {
 
                     ),
         
-                     SizedBox(height: 20), // Add spacing between text and buttons
+                     SizedBox(height: 50), // Add spacing between text and buttons
                       CommonButton(
               buttonText: 'Continue',
               onPressed: () {
