@@ -78,9 +78,12 @@ class ReusableTextField extends StatelessWidget {
               },
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: QualityPoolTextstyle(context)
-                    .smallText
-                    .copyWith(color: const Color.fromARGB(255, 219, 219, 219)),
+                hintStyle: QualityPoolTextstyle(context).smallText.copyWith(
+                      color: const Color.fromARGB(150, 148, 185,
+                          207), // Adjusted alpha for transparency
+                      fontWeight: FontWeight.w900,
+                    ),
+
                 filled: false, // No background color
                 border: UnderlineInputBorder(
                   borderSide:
