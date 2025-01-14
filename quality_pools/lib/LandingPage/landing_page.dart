@@ -5,9 +5,14 @@ import 'package:quality_pools/Login/loginPage.dart';
 import 'package:quality_pools/Register/register.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
