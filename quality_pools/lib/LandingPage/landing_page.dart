@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
+import 'package:quality_pools/CommonComponants/reusable_navbar.dart';
 import 'package:quality_pools/Login/loginPage.dart';
 import 'package:quality_pools/Register/register.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
@@ -32,7 +33,6 @@ class LandingPage extends StatelessWidget {
             Spacer(),
             QualityPoolHeader(),
             Spacer(),
-
             CommonButton(
               buttonText: 'Login',
               onPressed: () {
