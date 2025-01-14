@@ -74,7 +74,7 @@ class RegisterPage extends StatelessWidget {
                       hintText: '000 111 222 444',
                       controller: _cellPhoneNumber,
                       labelText: 'Cell Number',
-                      imagePath: 'images/password.png',
+                      imagePath: 'images/call.png',
                       obscureText: true,
                       validator: (value) {
                         // Validate password on form submission
@@ -88,10 +88,10 @@ class RegisterPage extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                            ReusableTextField(
-                      hintText: 'Address Text',
+                      hintText: 'Enter Address',
                       controller: _homeAddress,
                       labelText: 'Address Text',
-                      imagePath: 'images/password.png',
+                      imagePath: 'images/location.png',
                       obscureText: true,
                       validator: (value) {
                         // Validate password on form submission
@@ -106,7 +106,7 @@ class RegisterPage extends StatelessWidget {
                     SizedBox(height: 20),
                     SizedBox( height:20),
                     ReusableTextField(
-                      hintText: '**************',
+                      hintText: 'Enter Password',
                       controller: _passwordController,
                       labelText: 'Password',
                       imagePath: 'images/password.png',
@@ -123,7 +123,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     SizedBox( height:20),
                     ReusableTextField(
-                      hintText: '**************',
+                      hintText: 'Confirm Password',
                       controller: _passwordController,
                       labelText: 'Confirm Password',
                       imagePath: 'images/password.png',
@@ -140,19 +140,19 @@ class RegisterPage extends StatelessWidget {
                     ),
                      SizedBox(height: 80), // Add spacing between text and buttons
                         CommonButton(
-              buttonText: 'Continue',
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddPoolImage(),
-                    ),);
-              },
-            ),
-                    ]
-                  )
+                      buttonText: 'Continue',
+                      onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AddPoolImage(),
+                            ),);
+                      },
+                    ),
+                            ]
+                          )
 
-                  ),)
+                        ),)
             
           ],
         ),
