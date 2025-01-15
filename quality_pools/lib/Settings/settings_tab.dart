@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
 import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
 import 'package:quality_pools/Login/loginPage.dart';
+import 'package:quality_pools/Settings/dropdown.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/navbar.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/main_page_layout.dart';
 
-class SettingsTab extends StatelessWidget {
+class SettingsTab extends StatefulWidget {
   const SettingsTab({super.key});
 
+  @override
+  State<SettingsTab> createState() => _SettingsTabState();
+}
+
+class _SettingsTabState extends State<SettingsTab> {
+  String? selectedValue;
   @override
   Widget build(BuildContext context) {
     final TextEditingController _emailController = TextEditingController();
@@ -32,9 +39,13 @@ class SettingsTab extends StatelessWidget {
           SizedBox(height: 20),
           // Add the content specific to SettingsTab here
           Text(
-            'Your settings content goes here...',
+            'Pool Test Reminder',
             style: QualityPoolTextstyle(context).blackbodyText,
           ),
+          ReusableDropdown(selectedValue: 'Remind me every week', items: ['Remind me every week', 'Remind me every 2 weeks', 'Remind me later'], hintText: 'Choose option', onChanged: (String? newValue) {
+            setState(() {
+              selectedValue = newValue; 
+            });}),
           Form(
                   key: _formKey,
                   child: Container(
