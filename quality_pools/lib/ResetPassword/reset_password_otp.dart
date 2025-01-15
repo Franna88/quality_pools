@@ -51,7 +51,7 @@ class _ResetPasswordOTPState extends State<ResetPasswordOTP> {
             SizedBox(height: screenHeight * 0.1),
             Text(
               'Reset Password',
-              style: QualityPoolTextstyle(context).subHeaderStyle,
+              style: QualityPoolTextstyle(context).whiteStyleBody,
             ),
             SizedBox(height: screenHeight * 0.05),
             Visibility(
@@ -61,7 +61,7 @@ class _ResetPasswordOTPState extends State<ResetPasswordOTP> {
                   children: [
                     Text(
                       'A one time pin has been sent to your email.',
-                      style: QualityPoolTextstyle(context).bodyText,
+                      style: QualityPoolTextstyle(context).whitebodyText,
                     ),
                     SizedBox(height: screenHeight * 0.05),
                     SizedBox(
