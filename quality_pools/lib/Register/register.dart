@@ -8,7 +8,7 @@ import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
 import 'package:quality_pools/HomePage/home_page.dart';
 import 'package:quality_pools/main_page_layout.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
