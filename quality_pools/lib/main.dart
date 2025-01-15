@@ -29,6 +29,6 @@ void main() async {
     print("Error initializing Firebase: $e");
   }
   runApp(MaterialApp(
-    home: const LandingPage(),
+    home: Scaffold(body: const LandingPage()),
   ));
 }
