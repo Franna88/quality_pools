@@ -20,15 +20,27 @@ class QualityPoolTextstyle {
       );
 
   // Body Text Styles
-  TextStyle get bodyText => TextStyle(
+  TextStyle get whitebodyText => TextStyle(
         fontSize: width / 30,
         fontWeight: FontWeight.normal,
         color: Colors.white,
       );
 
-  // Body Text Styles
-  TextStyle get subHeaderStyle => GoogleFonts.judson(
+  TextStyle get blackbodyText => TextStyle(
         fontSize: width / 24,
+        fontWeight: FontWeight.normal,
+        color: Colors.black,
+      );
+
+  TextStyle get blackStyleBody => GoogleFonts.judson(
+        fontSize: width / 24,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      );
+
+  // Body Text Styles
+  TextStyle get whiteStyleBody => GoogleFonts.judson(
+        fontSize: width / 22,
         fontWeight: FontWeight.normal,
         color: Colors.white,
       );

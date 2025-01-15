@@ -53,7 +53,7 @@ class ReusableTextField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
             labelText,
-            style: QualityPoolTextstyle(context).bodyText,
+            style: QualityPoolTextstyle(context).whitebodyText,
           ),
         ),
         // Stack to position the icon over the underline
