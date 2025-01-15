@@ -95,7 +95,7 @@ class Loginpage extends StatelessWidget {
                       },
                       child: Text(
                         'Forgot Password?',
-                        style: QualityPoolTextstyle(context).bodyText,
+                        style: QualityPoolTextstyle(context).whitebodyText,
                       ),
                     )
                   ],
