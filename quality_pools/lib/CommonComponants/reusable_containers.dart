@@ -54,7 +54,8 @@ class ReusableContainers extends StatelessWidget {
             ],
           ),
           ),
-          const SizedBox(width: 10), 
+          const SizedBox(width: 10), // Add spacing between container and text
+          
         ],
       ),
     );
