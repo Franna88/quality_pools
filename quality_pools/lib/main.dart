@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
+import 'package:quality_pools/HomePage/home_page.dart';
 import 'package:quality_pools/LandingPage/landing_page.dart';
 import 'package:quality_pools/Register/register.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:quality_pools/Settings/settings_tab.dart';
 
 void main() async {
   // Enable clean URL strategy for web apps (without # in the URL)
@@ -29,6 +31,6 @@ void main() async {
     print("Error initializing Firebase: $e");
   }
   runApp(MaterialApp(
-    home: Scaffold(body: const LandingPage()),
+    home: Scaffold(body: const SettingsTab()),
   ));
 }

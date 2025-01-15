@@ -76,10 +76,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: '000 111 222 444',
+                          hintText: 'Enter Cell Number',
                           controller: _cellPhoneNumber,
                           labelText: 'Cell Number',
-                          imagePath: 'images/password.png',
+                          imagePath: 'images/call.png',
                           obscureText: true,
                           validator: (value) {
                             // Validate password on form submission
@@ -93,10 +93,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: 'Address Text',
+                          hintText: 'Enter Address',
                           controller: _homeAddress,
                           labelText: 'Address Text',
-                          imagePath: 'images/password.png',
+                          imagePath: 'images/location.png',
                           obscureText: true,
                           validator: (value) {
                             // Validate password on form submission
@@ -111,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: 20),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: '**************',
+                          hintText: 'Enter Password',
                           controller: _passwordController,
                           labelText: 'Password',
                           imagePath: 'images/password.png',
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: '**************',
+                          hintText: 'Enter Password',
                           controller: _passwordController,
                           labelText: 'Confirm Password',
                           imagePath: 'images/password.png',

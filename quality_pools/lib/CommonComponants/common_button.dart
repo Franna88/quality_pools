@@ -30,7 +30,7 @@ class CommonButton extends StatelessWidget {
       child: FilledButton(
         style: FilledButton.styleFrom(
           backgroundColor: Colors
-              .transparent, // Set transparent to avoid overriding the container color
+              .transparent, 
           minimumSize: const Size(200, 45),
         ),
         onPressed: onPressed,
