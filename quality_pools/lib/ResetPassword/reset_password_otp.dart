@@ -13,14 +13,13 @@ class ResetPasswordOTP extends StatefulWidget {
 
 class _ResetPasswordOTPState extends State<ResetPasswordOTP> {
   final TextEditingController _OTPController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool showOTPForm = true; // Controls which Visibility widget is shown
-  bool isPasswordCreated =
-      false; // Tracks if the password is successfully created
+  int currentStep = 0; // 0: sentOTP, 1: enterOTP, 2: enterNewPassword
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +35,9 @@ class _ResetPasswordOTPState extends State<ResetPasswordOTP> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0XFF1A8CF0),
-              Color(0XFF095BB2),
-              Color(0xFF002A6A),
+              const Color(0XFF1A8CF0),
+              const Color(0XFF095BB2),
+              const Color(0xFF002A6A),
             ],
           ),
         ),
@@ -47,114 +46,132 @@ class _ResetPasswordOTPState extends State<ResetPasswordOTP> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: screenHeight * 0.08),
-            QualityPoolHeader(),
+            const QualityPoolHeader(),
             SizedBox(height: screenHeight * 0.1),
             Text(
               'Reset Password',
               style: QualityPoolTextstyle(context).whiteStyleBody,
             ),
             SizedBox(height: screenHeight * 0.05),
+
+            // Sent OTP Step
             Visibility(
-              visible: showOTPForm, // Controlled by the boolean state
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    Text(
-                      'A one time pin has been sent to your email.',
-                      style: QualityPoolTextstyle(context).whitebodyText,
-                    ),
-                    SizedBox(height: screenHeight * 0.05),
-                    SizedBox(
-                      width: screenWidth * 0.8,
-                      child: Form(
-                        key: _formKey, // Attach the global key
-                        child: Column(
-                          children: [
-                            ReusableTextField(
-                              hintText: 'OTP',
-                              controller: _OTPController,
-                              labelText: 'Enter OTP',
-                              imagePath: 'images/otp.png',
-                            ),
-                          ],
-                        ),
+              visible: currentStep == 0,
+              child: Column(
+                children: [
+                  Text(
+                    'Please enter phone number to receive OTP',
+                    style: QualityPoolTextstyle(context).whitebodyText,
+                  ),
+                  SizedBox(height: screenHeight * 0.05),
+                  SizedBox(
+                    width: screenWidth * 0.8,
+                    child: Form(
+                      key: _formKey,
+                      child: ReusableTextField(
+                        hintText: 'phoneNumber',
+                        controller: _phoneNumberController,
+                        labelText: 'Enter phone number',
+                        imagePath: 'images/password.png',
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
+
+            // Enter OTP Step
             Visibility(
-              visible: !showOTPForm, // Controlled by the boolean state
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: screenWidth * 0.8,
-                      child: Form(
-                        key: _formKey, // Attach the global key
-                        child: Column(
-                          children: [
-                            ReusableTextField(
-                              hintText: 'Enter password',
-                              controller: _passwordController,
-                              labelText: 'New Password',
-                              imagePath: 'images/password.png',
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Password cannot be empty';
-                                }
-                                if (value.length < 6) {
-                                  return 'Password must be at least 6 characters long';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: screenHeight * 0.02),
-                            ReusableTextField(
-                              hintText: 'Enter password',
-                              controller: _confirmPasswordController,
-                              labelText: 'Confirm Password',
-                              imagePath: 'images/password.png',
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please confirm your password';
-                                }
-                                if (value != _passwordController.text) {
-                                  return 'Passwords do not match';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: screenHeight * 0.02),
-                            if (isPasswordCreated)
-                              Text(
-                                'Password Created',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            SizedBox(height: screenHeight * 0.05),
-                          ],
-                        ),
+              visible: currentStep == 1,
+              child: Column(
+                children: [
+                  Text(
+                    'A one-time pin has been sent to your email.',
+                    style: QualityPoolTextstyle(context).whitebodyText,
+                  ),
+                  SizedBox(height: screenHeight * 0.05),
+                  SizedBox(
+                    width: screenWidth * 0.8,
+                    child: Form(
+                      key: _formKey,
+                      child: ReusableTextField(
+                        hintText: 'OTP',
+                        controller: _OTPController,
+                        labelText: 'Enter OTP',
+                        imagePath: 'images/otp.png',
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            Spacer(),
+
+            // Enter New Password Step
+            Visibility(
+              visible: currentStep == 2,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: screenWidth * 0.8,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          ReusableTextField(
+                            hintText: 'Enter password',
+                            controller: _passwordController,
+                            labelText: 'New Password',
+                            imagePath: 'images/password.png',
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Password cannot be empty';
+                              }
+                              if (value.length < 6) {
+                                return 'Password must be at least 6 characters long';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: screenHeight * 0.02),
+                          ReusableTextField(
+                            hintText: 'Confirm password',
+                            controller: _confirmPasswordController,
+                            labelText: 'Confirm Password',
+                            imagePath: 'images/password.png',
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please confirm your password';
+                              }
+                              if (value != _passwordController.text) {
+                                return 'Passwords do not match';
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Spacer(),
+
+            // Continue/Confirm Button
             CommonButton(
-              buttonText: 'Continue',
+              buttonText: currentStep == 2 ? 'Confirm' : 'Continue',
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   setState(() {
-                    if (showOTPForm) {
-                      showOTPForm = false; // Switch to password form
+                    if (currentStep < 2) {
+                      currentStep++;
                     } else {
-                      isPasswordCreated = true; // Mark password as created
+                      // Handle confirmation logic here
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Password updated successfully!')),
+                      );
                     }
                   });
                 }
