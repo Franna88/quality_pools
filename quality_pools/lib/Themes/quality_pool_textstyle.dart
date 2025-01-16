@@ -19,16 +19,28 @@ class QualityPoolTextstyle {
         color: Colors.white,
       );
 
-  // Body Text Styles
-  TextStyle get whitebodyText => TextStyle(
-        fontSize: width / 30,
-        fontWeight: FontWeight.normal,
+  TextStyle get readingType => GoogleFonts.nunito(
+        fontSize: width / 18,
+        fontWeight: FontWeight.bold,
         color: Colors.white,
       );
 
-  TextStyle get blackbodyText => TextStyle(
+  // Body Text Styles
+  TextStyle get whitebodyText => GoogleFonts.nunito(
         fontSize: width / 24,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      );
+
+  TextStyle get blackSubheaderText => GoogleFonts.nunito(
+        fontSize: width / 20,
+        fontWeight: FontWeight.w500,
+        color: Colors.black,
+      );
+
+  TextStyle get blackbodyText => GoogleFonts.nunito(
+        fontSize: width / 24,
+        fontWeight: FontWeight.w500,
         color: Colors.black,
       );
 
@@ -40,22 +52,15 @@ class QualityPoolTextstyle {
 
   // Body Text Styles
   TextStyle get whiteStyleBody => GoogleFonts.judson(
-        fontSize: width / 22,
-        fontWeight: FontWeight.normal,
+        fontSize: width / 18,
+        fontWeight: FontWeight.w600,
         color: Colors.white,
       );
 
-  TextStyle get smallText => TextStyle(
+  TextStyle get smallText => GoogleFonts.nunito(
         fontSize: width / 34,
         fontWeight: FontWeight.normal,
         color: Colors.white,
-      );
-
-  // Caption Style
-  TextStyle get caption => TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.normal,
-        color: Colors.grey,
       );
 
   // Custom Style Example
