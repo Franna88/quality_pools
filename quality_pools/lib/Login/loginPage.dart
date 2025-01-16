@@ -1,18 +1,53 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
 import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
+import 'package:quality_pools/HomePage/home_page.dart';
 import 'package:quality_pools/ResetPassword/reset_password_otp.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 
-class Loginpage extends StatelessWidget {
+class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
 
+  @override
+  State<Loginpage> createState() => _LoginpageState();
+}
+
+class _LoginpageState extends State<Loginpage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
+
+    @override
+    void dispose() {
+      _emailController.dispose();
+      _passwordController.dispose();
+      super.dispose();
+    }
+
+    void _signIn() async {
+      String email = _emailController.text.trim();
+      String password = _passwordController.text.trim();
+
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        print("User signed in: ${userCredential.user?.uid}");
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } catch (e) {
+        print("Error signing in: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Error: ${e.toString()}")),
+        );
+      }
+    }
 
     // GlobalKey for form validation
     final _formKey = GlobalKey<FormState>();
@@ -109,7 +144,8 @@ class Loginpage extends StatelessWidget {
               onPressed: () {
                 if (_formKey.currentState?.validate() ?? false) {
                   // If the form is valid, proceed with login logic
-                  print("Form is valid, proceed with login");
+                  _signIn();
+                  print("Login is valid, proceed with login");
                   // Implement your login logic here (e.g., Firebase authentication)
                 } else {
                   print("Form is not valid");
