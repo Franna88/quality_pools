@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
+import 'package:quality_pools/HomePage/home_page.dart';
 import 'package:quality_pools/Login/loginPage.dart';
 import 'package:quality_pools/Register/register.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
@@ -13,6 +15,22 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null && currentUser.uid.isNotEmpty) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

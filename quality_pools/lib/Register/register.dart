@@ -6,6 +6,7 @@ import 'package:quality_pools/AddPool/poolImage.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
 import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
 import 'package:quality_pools/HomePage/home_page.dart';
+import 'package:quality_pools/UserAuthentication/firebase_auth_services.dart';
 import 'package:quality_pools/main_page_layout.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -21,8 +22,55 @@ class _RegisterPageState extends State<RegisterPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _cellPhoneNumber = TextEditingController();
-    final TextEditingController _homeAddress = TextEditingController();
+
+    final TextEditingController _phoneNumberController =
+        TextEditingController();
+    final TextEditingController _addressController = TextEditingController();
+
+    final FirebaseAuthServices _auth = FirebaseAuthServices();
+
+    void _register() async {
+      // Create user in Firebase Auth
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      // Get Auth uid
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+      // Prepare the user data for Firestore
+      var userData = {
+        "id": userId,
+
+        "address": _addressController.text,
+        "mobileNumber": _phoneNumberController.text,
+        // other data...
+      };
+// Update Firestore data
+
+      try {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .set(userData);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      } catch (e) {
+        print("weird error...try again");
+      }
+    }
+
+    @override
+    void dispose() {
+      _emailController.dispose();
+      _passwordController.dispose();
+      _phoneNumberController.dispose();
+      _addressController.dispose();
+      super.dispose();
+    }
 
     //GlobalKey for form validation
     final _formKey = GlobalKey<FormState>();
@@ -77,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: 20),
                         ReusableTextField(
                           hintText: '000 111 222 444',
-                          controller: _cellPhoneNumber,
+                          controller: _phoneNumberController,
                           labelText: 'Cell Number',
                           imagePath: 'images/password.png',
                           obscureText: true,
@@ -94,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: 20),
                         ReusableTextField(
                           hintText: 'Address Text',
-                          controller: _homeAddress,
+                          controller: _addressController,
                           labelText: 'Address Text',
                           imagePath: 'images/password.png',
                           obscureText: true,
@@ -144,19 +192,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                         ),
                         SizedBox(
-                            height: 80), // Add spacing between text and buttons
+                            height:
+                                80), //// Add spacing between text and buttons
                         CommonButton(
                           buttonText: 'Continue',
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()));
+                            _register();
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
                             //     builder: (context) => const AddPoolImage(),
-                            //   ),);
+                            //   ),
+                            // );
                           },
                         ),
                       ])),
