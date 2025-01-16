@@ -16,8 +16,8 @@ class ReusableGradientButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60,
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+        height: MediaQuery.of(context).size.height * 0.06,
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [

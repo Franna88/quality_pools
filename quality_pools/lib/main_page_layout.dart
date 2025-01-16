@@ -44,7 +44,6 @@ class MainPageLayout extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
             Expanded(
               child: Container(
                 width: double.infinity,

@@ -17,10 +17,15 @@ class PoolReadings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Center(
       child: Wrap(
-        spacing: 20.0, // Horizontal space between items
-        runSpacing: 20.0, // Vertical space between rows
+        spacing: screenWidth *
+            0.05, // Horizontal space between items (5% of screen width)
+        runSpacing: screenHeight *
+            0.05, // Vertical space between rows (5% of screen height)
         children: readingDetails.entries
             .map((entry) => Flexible(
                   child: GestureDetector(
@@ -91,6 +96,9 @@ class _FadeTooltipState extends State<FadeTooltip> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Center(
       child: AnimatedOpacity(
         opacity: _opacity,
@@ -102,11 +110,13 @@ class _FadeTooltipState extends State<FadeTooltip> {
             BlueReadingsContainer(
               readingType: widget.abbreviation,
             ),
-            const SizedBox(
-                height: 20), // Add spacing between the two containers
+            SizedBox(
+                height: screenHeight *
+                    0.02), // Add spacing between the two containers
             // Display the blue container with the full name
             Container(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(
+                  screenWidth * 0.04), // Adjust padding to be responsive
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(8.0),
