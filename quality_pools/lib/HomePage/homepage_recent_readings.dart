@@ -15,7 +15,15 @@ class HomePageRecentReadings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double secondContainerWidth = MediaQuery.of(context).size.width - 20;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Adjust container width and height based on screen size
+    double containerWidth = screenWidth - 20; // Padding adjustment
+    double secondContainerHeight =
+        screenHeight * 0.32; // Adjust height as 30% of screen height
+    double nextReadingHeight =
+        screenHeight * 0.07; // Adjust height as 7% of screen height
 
     return Material(
       color: Colors.white,
@@ -25,9 +33,11 @@ class HomePageRecentReadings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            // Pool Name Container
             Container(
-              width: secondContainerWidth / 2,
-              height: 45,
+              width: containerWidth / 2, // 50% of screen width
+              height: screenHeight *
+                  0.045, // 5% of screen height for better scalability
               decoration: BoxDecoration(
                 color: const Color(0XFF1A8CF0),
                 borderRadius: const BorderRadius.only(
@@ -36,19 +46,22 @@ class HomePageRecentReadings extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(poolName,
-                        style: QualityPoolTextstyle(context).whiteStyleBody),
+                    Text(
+                      poolName,
+                      style: QualityPoolTextstyle(context).whiteStyleBody,
+                    )
                   ],
                 ),
               ),
             ),
+            // Pool Readings Container
             Container(
-              width: secondContainerWidth,
-              height: MediaQuery.of(context).size.height * 0.3,
+              width: containerWidth,
+              height: secondContainerHeight,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: const BorderRadius.only(
@@ -65,12 +78,10 @@ class HomePageRecentReadings extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: PoolReadings(),
-              ),
+              child: PoolReadings(),
             ),
             const SizedBox(height: 30),
+            // Next Reading Date Container
             Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
@@ -83,8 +94,8 @@ class HomePageRecentReadings extends StatelessWidget {
                   ),
                 ],
               ),
-              width: secondContainerWidth,
-              height: MediaQuery.of(context).size.height * 0.07,
+              width: containerWidth,
+              height: nextReadingHeight,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(

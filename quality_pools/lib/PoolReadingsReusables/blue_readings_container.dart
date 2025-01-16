@@ -17,7 +17,7 @@ class BlueReadingsContainer extends StatelessWidget {
       builder: (context, constraints) {
         // Calculate the size of the square as a percentage of the screen's width
         double size =
-            constraints.maxWidth * 0.28; // Adjust 0.5 as needed for size ratio
+            constraints.maxWidth * 0.26; // Adjust 0.5 as needed for size ratio
 
         return Padding(
           padding: const EdgeInsets.all(0.0),

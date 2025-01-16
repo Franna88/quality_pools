@@ -20,14 +20,14 @@ class QualityPoolTextstyle {
       );
 
   TextStyle get readingType => GoogleFonts.nunito(
-        fontSize: width / 18,
+        fontSize: width / 20,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       );
 
   // Body Text Styles
   TextStyle get whitebodyText => GoogleFonts.nunito(
-        fontSize: width / 24,
+        fontSize: width / 26,
         fontWeight: FontWeight.w600,
         color: Colors.white,
       );
@@ -39,20 +39,20 @@ class QualityPoolTextstyle {
       );
 
   TextStyle get blackbodyText => GoogleFonts.nunito(
-        fontSize: width / 24,
+        fontSize: width / 26,
         fontWeight: FontWeight.w500,
         color: Colors.black,
       );
 
   TextStyle get blackStyleBody => GoogleFonts.judson(
-        fontSize: width / 24,
+        fontSize: width / 26,
         fontWeight: FontWeight.w600,
         color: Colors.black,
       );
 
   // Body Text Styles
   TextStyle get whiteStyleBody => GoogleFonts.judson(
-        fontSize: width / 18,
+        fontSize: width / 20,
         fontWeight: FontWeight.w600,
         color: Colors.white,
       );

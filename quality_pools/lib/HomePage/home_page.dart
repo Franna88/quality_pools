@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             'Most Recent Readings',
             style: QualityPoolTextstyle(context).blackSubheaderText,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Expanded(
             child: PageView.builder(
               controller: pageController,
@@ -45,8 +45,10 @@ class HomePage extends StatelessWidget {
               children: [
                 // Left Arrow
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: MediaQuery.of(context).size.width *
+                      0.1, // Adjusted width to 1%
+                  height: MediaQuery.of(context).size.height *
+                      0.05, // Adjusted height to 7%
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -62,7 +64,7 @@ class HomePage extends StatelessWidget {
                   child: Center(
                     child: IconButton(
                       icon: Icon(Icons.arrow_back_ios,
-                          color: Colors.grey.shade600),
+                          size: 18, color: Colors.grey.shade600),
                       onPressed: () {
                         if (pageController.hasClients) {
                           pageController.previousPage(
@@ -80,15 +82,18 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Container(
                     width: 5,
-                    height: 60,
+                    height: MediaQuery.of(context).size.height *
+                        0.05, // Adjusted height to 7%
                     color: Colors.grey.shade600,
                   ),
                 ),
 
                 // Right Arrow
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: MediaQuery.of(context).size.width *
+                      0.1, // Adjusted width to 1%
+                  height: MediaQuery.of(context).size.height *
+                      0.05, // Adjusted height to 7%
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -104,7 +109,7 @@ class HomePage extends StatelessWidget {
                   child: Center(
                     child: IconButton(
                       icon: Icon(Icons.arrow_forward_ios,
-                          color: Colors.grey.shade600),
+                          size: 18, color: Colors.grey.shade600),
                       onPressed: () {
                         if (pageController.hasClients) {
                           pageController.nextPage(
@@ -119,9 +124,9 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 30),
-          ReusableGradientButton(text: 'Test Pool', onTap: () {}),
           const SizedBox(height: 20),
+          ReusableGradientButton(text: 'Test Pool', onTap: () {}),
+          const SizedBox(height: 10),
           ReusableGradientButton(text: 'My Pool Records', onTap: () {}),
         ],
       ),
