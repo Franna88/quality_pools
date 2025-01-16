@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/HomePage/home_page.dart';
+import 'package:quality_pools/LandingPage/landing_page.dart';
 import 'package:quality_pools/MyPools/my_pools.dart';
 import 'package:quality_pools/main_page_layout.dart';
 import 'package:quality_pools/Settings/settings_tab.dart';
@@ -45,7 +47,11 @@ class Navbar extends StatelessWidget {
             );
             break;
           case 'Logout':
-            Navigator.pushNamed(context, '/login');
+            FirebaseAuth.instance.signOut(); // Close the popup
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LandingPage()),
+            );
             break;
         }
       },
