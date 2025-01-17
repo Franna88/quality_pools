@@ -54,17 +54,16 @@ class HomePage extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: Offset(0, 3), // Shadow position
+                        color: Colors.grey.shade400,
+                        blurRadius: 1,
+                        offset: Offset(0, 4),
                       ),
                     ],
                   ),
                   child: Center(
                     child: IconButton(
                       icon: Icon(Icons.arrow_back_ios,
-                          size: 18, color: Colors.grey.shade600),
+                          size: 18, color: Colors.black),
                       onPressed: () {
                         if (pageController.hasClients) {
                           pageController.previousPage(
@@ -81,10 +80,10 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Container(
-                    width: 5,
+                    width: 3,
                     height: MediaQuery.of(context).size.height *
                         0.05, // Adjusted height to 7%
-                    color: Colors.grey.shade600,
+                    color: Colors.grey.shade400,
                   ),
                 ),
 
@@ -99,17 +98,16 @@ class HomePage extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: Offset(0, 3), // Shadow position
+                        color: Colors.grey.shade400,
+                        blurRadius: 1,
+                        offset: Offset(0, 4),
                       ),
                     ],
                   ),
                   child: Center(
                     child: IconButton(
                       icon: Icon(Icons.arrow_forward_ios,
-                          size: 18, color: Colors.grey.shade600),
+                          size: 18, color: Colors.black),
                       onPressed: () {
                         if (pageController.hasClients) {
                           pageController.nextPage(
