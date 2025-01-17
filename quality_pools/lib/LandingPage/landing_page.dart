@@ -69,7 +69,7 @@ class _LandingPageState extends State<LandingPage> {
             ),
             const SizedBox(height: 20), // Space between the buttons
             CommonButton(
-              buttonText: 'Sign Up',
+              buttonText: 'rudi test 1',
               onPressed: () {
                 Navigator.push(
                   context,
