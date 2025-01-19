@@ -29,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
       body: Container(
+        
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -44,6 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 30),
             QualityPoolHeader(),
@@ -53,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Form(
                   key: _formKey,
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ReusableTextField(
                           hintText: 'Enter Email',
@@ -152,14 +154,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const HomePage()));
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const AddPoolImage(),
-                            //   ),);
+                            
                           },
                         ),
-                      ])),
+                      ]
+                      )
+                      ),
             )
           ],
         ),
