@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
+import 'package:quality_pools/Themes/quality_pools_colors.dart';
 
 class ReusableTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
   final bool obscureText;
-  final String labelText; // Defined labelText directly in this file
-  final String? Function(String?)? validator; // For validation
-  final String imagePath; // Path to the image for the profile (required)
+  final String labelText;
+  final String? Function(String?)? validator;
+  final String imagePath;
 
   const ReusableTextField({
     Key? key,
@@ -18,7 +19,7 @@ class ReusableTextField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     required this.labelText,
-    required this.imagePath, // Now required
+    required this.imagePath,
   }) : super(key: key);
 
   // Email validator
@@ -48,7 +49,7 @@ class ReusableTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Label text (header)
+        // Label text
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
@@ -56,10 +57,9 @@ class ReusableTextField extends StatelessWidget {
             style: QualityPoolTextstyle(context).whitebodyText,
           ),
         ),
-        // Stack to position the icon over the underline
+        // TextFormField with white underline
         Stack(
           children: [
-            // TextFormField with white underline
             TextFormField(
               controller: controller,
               obscureText: obscureText,
@@ -68,10 +68,11 @@ class ReusableTextField extends StatelessWidget {
                 color: Colors.white, // White text color
               ),
               validator: (value) {
-                // Use custom validators based on the labelText
+                // Use specific validators based on labelText
                 if (labelText == 'Email') {
                   return emailValidator(value);
-                } else if (labelText == 'Password') {
+                } else if (labelText == 'Password' ||
+                    labelText == 'Confirm Password') {
                   return passwordValidator(value);
                 }
                 return validator?.call(value); // Default validation
@@ -79,37 +80,31 @@ class ReusableTextField extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: QualityPoolTextstyle(context).smallText.copyWith(
-                      color: const Color.fromARGB(150, 148, 185,
-                          207), // Adjusted alpha for transparency
+                      color: MyColors().darkBlue,
                       fontWeight: FontWeight.w900,
                     ),
-
-                filled: false, // No background color
-                border: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.white), // White line border
-                ),
+                filled: false,
                 enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.white), // White line border
+                  borderSide: BorderSide(color: Colors.white),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // White line border when focused
+                  borderSide: BorderSide(color: Colors.white, width: 2.0),
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
                 ),
               ),
             ),
             // Icon (Image) on top of the underline
             Positioned(
-              right: 0, // Position the image on the right
-              bottom: 0, // Align it to the bottom of the TextField
+              right: 0,
+              bottom: 0,
               child: Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 4.0), // Adjust the bottom padding to align it well
+                padding: const EdgeInsets.only(bottom: 4.0),
                 child: Image.asset(
                   imagePath,
-                  width: 24.0, // Adjust the width of the image
-                  height: 24.0, // Adjust the height of the image
+                  width: 24.0,
+                  height: 24.0,
                 ),
               ),
             ),
