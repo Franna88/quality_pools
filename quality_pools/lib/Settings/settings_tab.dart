@@ -15,15 +15,31 @@ class SettingsTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Title is now part of the bodyContent
-          Text(
-            'Settings',
-            style: QualityPoolTextstyle(context).blackbodyText,
-          ),
-          SizedBox(height: 20),
-          // Add the content specific to SettingsTab here
-          Text(
-            'Your settings content goes here...',
-            style: QualityPoolTextstyle(context).blackbodyText,
+          Container(
+            width: 200,
+            height: 300,
+            color: Colors.purple,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Settings',
+                  style: QualityPoolTextstyle(context).blackbodyText,
+                ),
+
+                // Add the content specific to SettingsTab here
+                Text(
+                  'Your settings content goes here...',
+                  style: QualityPoolTextstyle(context).blackbodyText,
+                ),
+
+                Text(
+                  'Your settings content goes here...',
+                  style: QualityPoolTextstyle(context).blackbodyText,
+                ),
+              ],
+            ),
           ),
         ],
       ),
