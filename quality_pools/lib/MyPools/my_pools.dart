@@ -32,8 +32,15 @@ class _MyPoolsState extends State<MyPools> {
 
   @override
   Widget build(BuildContext context) {
-    return MainPageLayout(
-      bodyContent: Text('Pool Page'),
+    return const MainPageLayout(
+      bodyContent: Center(
+          child: Column(
+        children: [
+          Text('Pool Page'),
+          SizedBox(height: 40),
+          Text('Pool Contents'),
+        ],
+      )),
     );
   }
 }
