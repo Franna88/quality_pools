@@ -11,37 +11,21 @@ class SettingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainPageLayout(
-      bodyContent: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Title is now part of the bodyContent
-          Container(
-            width: 200,
-            height: 300,
-            color: Colors.purple,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Settings',
-                  style: QualityPoolTextstyle(context).blackbodyText,
-                ),
-
-                // Add the content specific to SettingsTab here
-                Text(
-                  'Your settings content goes here...',
-                  style: QualityPoolTextstyle(context).blackbodyText,
-                ),
-
-                Text(
-                  'Your settings content goes here...',
-                  style: QualityPoolTextstyle(context).blackbodyText,
-                ),
-              ],
+      bodyContent: Center(
+        child: Column(
+          children: [
+            Text(
+              'Settings',
+              style: QualityPoolTextstyle(context).blackbodyText,
             ),
-          ),
-        ],
+            SizedBox(height: 40),
+            // Add the content specific to SettingsTab here
+            Text(
+              'Your settings content goes here...',
+              style: QualityPoolTextstyle(context).blackbodyText,
+            ),
+          ],
+        ),
       ),
     );
   }
