@@ -33,46 +33,54 @@ class _MyPoolsState extends State<MyPools> {
   @override
   Widget build(BuildContext context) {
     return MainPageLayout(
-      bodyContent: _isPoolSelected
-          ? PoolDetailsView(pool: _selectedPool!, goBack: _goBackToList)
-          : PoolListView(pools: pools, selectPool: _selectPool),
+      bodyContent: Text('Pool Page'),
     );
   }
 }
 
-class PoolListView extends StatelessWidget {
-  final List<String> pools;
-  final Function(String) selectPool;
+//   @override
+//   Widget build(BuildContext context) {
+//     return MainPageLayout(
+//       bodyContent: _isPoolSelected
+//           ? PoolDetailsView(pool: _selectedPool!, goBack: _goBackToList)
+//           : PoolListView(pools: pools, selectPool: _selectPool),
+//     );
+//   }
+// }
 
-  const PoolListView(
-      {required this.pools, required this.selectPool, super.key});
+// class PoolListView extends StatelessWidget {
+//   final List<String> pools;
+//   final Function(String) selectPool;
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          'My Pools',
-          style: QualityPoolTextstyle(context).blackbodyText,
-        ),
-        SizedBox(height: 20),
-        // List of pools
-        Expanded(
-          child: ListView.builder(
-            itemCount: pools.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  pools[index],
-                  style: QualityPoolTextstyle(context).blackbodyText,
-                ),
-                onTap: () => selectPool(pools[index]), // Select pool
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   const PoolListView(
+//       {required this.pools, required this.selectPool, super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       children: [
+//         Text(
+//           'My Pools',
+//           style: QualityPoolTextstyle(context).blackbodyText,
+//         ),
+//         SizedBox(height: 20),
+//         // List of pools
+//         Expanded(
+//           child: ListView.builder(
+//             itemCount: pools.length,
+//             itemBuilder: (context, index) {
+//               return ListTile(
+//                 title: Text(
+//                   pools[index],
+//                   style: QualityPoolTextstyle(context).blackbodyText,
+//                 ),
+//                 onTap: () => selectPool(pools[index]), // Select pool
+//               );
+//             },
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

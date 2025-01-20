@@ -31,7 +31,6 @@ class HomePageRecentReadings extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Pool Name Container
             Container(
