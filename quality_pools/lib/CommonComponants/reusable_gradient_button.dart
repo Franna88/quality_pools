@@ -25,6 +25,13 @@ class ReusableGradientButton extends StatelessWidget {
               Color(0XFF095BB2),
             ],
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade400,
+              blurRadius: 1,
+              offset: Offset(0, 4),
+            ),
+          ],
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(

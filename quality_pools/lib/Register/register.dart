@@ -22,7 +22,8 @@ class _RegisterPageState extends State<RegisterPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
-
+    final TextEditingController _confirmPasswordController =
+        TextEditingController();
     final TextEditingController _phoneNumberController =
         TextEditingController();
     final TextEditingController _addressController = TextEditingController();
@@ -101,7 +102,8 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Form(
                   key: _formKey,
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ReusableTextField(
                           hintText: 'Enter Email',
@@ -124,11 +126,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: '000 111 222 444',
+                          hintText: 'Enter phone number',
                           controller: _phoneNumberController,
                           labelText: 'Cell Number',
-                          imagePath: 'images/password.png',
-                          obscureText: true,
+                          imagePath: 'images/phone.png',
                           validator: (value) {
                             // Validate password on form submission
                             if (value == null || value.isEmpty) {
@@ -141,11 +142,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: 'Address Text',
+                          hintText: 'Enter home Address',
                           controller: _addressController,
-                          labelText: 'Address Text',
-                          imagePath: 'images/password.png',
-                          obscureText: true,
+                          labelText: 'Home address',
+                          imagePath: 'images/address.png',
                           validator: (value) {
                             // Validate password on form submission
                             if (value == null || value.isEmpty) {
@@ -156,10 +156,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 20),
+
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: '**************',
+                          hintText: 'Enter password',
                           controller: _passwordController,
                           labelText: 'Password',
                           imagePath: 'images/password.png',
@@ -176,8 +176,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         SizedBox(height: 20),
                         ReusableTextField(
-                          hintText: '**************',
-                          controller: _passwordController,
+                          hintText: 'Confirm password',
+                          controller: _confirmPasswordController,
                           labelText: 'Confirm Password',
                           imagePath: 'images/password.png',
                           obscureText: true,
