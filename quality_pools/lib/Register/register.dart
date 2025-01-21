@@ -17,20 +17,17 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _confirmPasswordController =
-        TextEditingController();
-    final TextEditingController _phoneNumberController =
-        TextEditingController();
-    final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
-    final FirebaseAuthServices _auth = FirebaseAuthServices();
+  final FirebaseAuthServices _auth = FirebaseAuthServices();
 
-    void _register() async {
+  void _register() async {
+    if (_formKey.currentState?.validate() ?? false) {
       // Create user in Firebase Auth
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text,
@@ -41,13 +38,11 @@ class _RegisterPageState extends State<RegisterPage> {
       // Prepare the user data for Firestore
       var userData = {
         "id": userId,
-
         "address": _addressController.text,
         "mobileNumber": _phoneNumberController.text,
         // other data...
       };
-// Update Firestore data
-
+      // Update Firestore data
       try {
         await FirebaseFirestore.instance
             .collection('users')
@@ -60,21 +55,34 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         );
       } catch (e) {
-        print("weird error...try again");
+        print("Error during registration: $e");
       }
+    } else {
+      // If form is not validated, just go to AddPoolImage
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AddPoolImage(),
+        ),
+      );
     }
+  }
 
-    @override
-    void dispose() {
-      _emailController.dispose();
-      _passwordController.dispose();
-      _phoneNumberController.dispose();
-      _addressController.dispose();
-      super.dispose();
-    }
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _phoneNumberController.dispose();
+    _addressController.dispose();
+    super.dispose();
+  }
 
-    //GlobalKey for form validation
-    final _formKey = GlobalKey<FormState>();
+  //GlobalKey for form validation
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Container(
@@ -111,11 +119,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: 'Email',
                           imagePath: 'images/email.png',
                           validator: (value) {
-                            // Validate email on form submission
                             if (value == null || value.isEmpty) {
                               return 'Please enter an email';
                             }
-                            // Simple email regex validation
                             final emailRegex = RegExp(
                                 r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                             if (!emailRegex.hasMatch(value)) {
@@ -131,7 +137,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: 'Cell Number',
                           imagePath: 'images/phone.png',
                           validator: (value) {
-                            // Validate password on form submission
                             if (value == null || value.isEmpty) {
                               return 'Please enter a cell number';
                             } else if (value.length < 10) {
@@ -147,16 +152,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: 'Home address',
                           imagePath: 'images/address.png',
                           validator: (value) {
-                            // Validate password on form submission
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a cell number';
+                              return 'Please enter an address';
                             } else if (value.length < 10) {
-                              return 'Cell Number must be at least 10 characters';
+                              return 'Address must be at least 10 characters';
                             }
                             return null;
                           },
                         ),
-
                         SizedBox(height: 20),
                         ReusableTextField(
                           hintText: 'Enter password',
@@ -165,7 +168,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           imagePath: 'images/password.png',
                           obscureText: true,
                           validator: (value) {
-                            // Validate password on form submission
                             if (value == null || value.isEmpty) {
                               return 'Please enter a password';
                             } else if (value.length < 6) {
@@ -182,29 +184,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           imagePath: 'images/password.png',
                           obscureText: true,
                           validator: (value) {
-                            // Validate password on form submission
                             if (value == null || value.isEmpty) {
-                              return 'Please enter a password';
+                              return 'Please confirm your password';
                             } else if (value.length < 6) {
                               return 'Password must be at least 6 characters';
                             }
                             return null;
                           },
                         ),
-                        SizedBox(
-                            height:
-                                80), //// Add spacing between text and buttons
+                        SizedBox(height: 80),
                         CommonButton(
                           buttonText: 'Continue',
-                          onPressed: () {
-                            _register();
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const AddPoolImage(),
-                            //   ),
-                            // );
-                          },
+                          onPressed: _register,
                         ),
                       ])),
             )
