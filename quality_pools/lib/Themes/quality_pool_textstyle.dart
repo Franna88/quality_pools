@@ -19,6 +19,19 @@ class QualityPoolTextstyle {
         color: Colors.white,
       );
 
+  TextStyle get pageTitle => GoogleFonts.judson(
+        fontSize: width / 14,
+        fontWeight: FontWeight.w500,
+        color: Colors.black,
+        shadows: [
+          Shadow(
+            offset: Offset(2.0, 2.0), // Horizontal and vertical offset
+            blurRadius: 3.0, // Blur radius
+            color: Colors.grey, // Shadow color
+          ),
+        ],
+      );
+
   TextStyle get readingType => GoogleFonts.nunito(
         fontSize: width / 20,
         fontWeight: FontWeight.bold,
