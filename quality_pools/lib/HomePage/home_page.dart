@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             'Most Recent Readings',
-            style: QualityPoolTextstyle(context).blackSubheaderText,
+            style: QualityPoolTextstyle(context).pageTitle,
           ),
           const SizedBox(height: 10),
           Expanded(
