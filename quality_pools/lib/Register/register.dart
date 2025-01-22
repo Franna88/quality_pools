@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/pooIInfo.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
@@ -195,8 +196,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: 80),
                         CommonButton(
                           buttonText: 'Continue',
-                          onPressed: _register,
-                        ),
+                          onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddPoolImage(),
+                    ),
+                    );
+  }),
                       ])),
             )
           ],
