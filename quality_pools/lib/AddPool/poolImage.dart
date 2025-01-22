@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/addpool_instructions.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/pooIInfo.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
@@ -53,7 +54,7 @@ class _AddPoolImageState extends State<AddPoolImage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddPoolInfo(),
+                      builder: (context) => const AddpoolInstructions(),
                     ),);
               },
             ),

@@ -54,7 +54,7 @@ class AddPoolInfo extends StatelessWidget {
                       hintText: 'Name',
                       controller: _poolName,
                       labelText: 'Pool Name',
-                      imagePath: 'images/email.png',
+                      imagePath: 'images/edit.png',
               
                    
                     ),
@@ -63,7 +63,7 @@ class AddPoolInfo extends StatelessWidget {
                       hintText: '2m',
                       controller: _lowestDepth,
                       labelText: 'Lowest Depth',
-                      imagePath: 'images/password.png',
+                      imagePath: 'images/edit.png',
                       obscureText: true,
                  
                     ),
@@ -72,7 +72,7 @@ class AddPoolInfo extends StatelessWidget {
                       hintText: '5m',
                       controller: _highestDepth,
                       labelText: 'Highest Depth',
-                      imagePath: 'images/password.png',
+                      imagePath: 'images/edit.png',
                       obscureText: true,
 
                     ),
