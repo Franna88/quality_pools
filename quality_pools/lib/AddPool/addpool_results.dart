@@ -36,7 +36,10 @@ class _AddPoolImageState extends State<AddpoolResults> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             QualityPoolHeader(),
-   
+             Container(
+              width: 100.0,
+              height: 100,),
+              
              SizedBox(height: 20), // Add spacing between text and buttons
             CommonButton(
               buttonText: 'Continue',

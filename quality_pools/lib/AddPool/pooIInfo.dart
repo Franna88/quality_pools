@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/addpool_instructions.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
@@ -78,22 +79,25 @@ class AddPoolInfo extends StatelessWidget {
                     ),
         
                      SizedBox(height: 50), // Add spacing between text and buttons
-                      CommonButton(
-              buttonText: 'Continue',
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddPoolInfo(),
-                    ),);
-              },
-            ),
+          
                   
                     ]
                   )
 
-                  ),)
-            
+                  ),),
+
+                    SizedBox(height: 100),
+                  CommonButton(
+                      buttonText: 'Continue',
+                      onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AddpoolInstructions(),
+                            ),);
+              },
+            ),
+                  
           ],
         ),
       ),

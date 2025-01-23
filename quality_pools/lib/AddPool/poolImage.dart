@@ -37,6 +37,16 @@ class _AddPoolImageState extends State<AddPoolImage> {
           children: [
             QualityPoolHeader(),
                 SizedBox(height: 20), // Add spacing between text and buttons
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35),
+                    color: const Color.fromARGB(193, 102, 164, 209).withOpacity(0.5),  
+                    ),
+                  
+                  width: 300,
+                  height: 300,
+                 ),
+                  SizedBox(height: 20,),
                             CommonButton(
               buttonText: 'Select Image',
               onPressed: () {
@@ -47,14 +57,14 @@ class _AddPoolImageState extends State<AddPoolImage> {
                     ),);
               },
             ),
-             SizedBox(height: 20), // Add spacing between text and buttons
+             SizedBox(height: 60), // Add spacing between text and buttons
                             CommonButton(
               buttonText: 'Continue',
               onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddpoolInstructions(),
+                      builder: (context) => const AddPoolInfo(),
                     ),);
               },
             ),
