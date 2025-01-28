@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/MyPools/pool_homepage_container.dart';
 import 'package:quality_pools/MyPools/view_pools.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/main_page_layout.dart';
@@ -13,81 +14,69 @@ class MyPools extends StatefulWidget {
 class _MyPoolsState extends State<MyPools> {
   bool _isPoolSelected = false; // Tracks whether a pool is selected
   String? _selectedPool; // Holds the name of the selected pool
+  String? _selectedPoolImage; // Holds the image URL of the selected pool
 
   final List<String> pools = ['Pool 1', 'Pool 2', 'Pool 3']; // List of pools
 
-  void _selectPool(String pool) {
-    setState(() {
-      _selectedPool = pool;
-      _isPoolSelected = true; // Switch to pool details view
-    });
-  }
-
-  void _goBackToList() {
-    setState(() {
-      _selectedPool = null;
-      _isPoolSelected = false; // Switch back to pool list
-    });
+  void _selectPool(String pool, String imageUrl) {
+    // Navigate to the ViewPools page and pass the pool name and image URL
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ViewPools(
+          poolName: pool,
+          poolImageUrl: imageUrl,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return const MainPageLayout(
-      bodyContent: Center(
-          child: Column(
-        children: [
-          Text('Pool Page'),
-          SizedBox(height: 40),
-          Text('Pool Contents'),
-        ],
-      )),
+    return MainPageLayout(
+      bodyContent: PoolListView(
+        pools: pools,
+        selectPool: _selectPool,
+      ),
     );
   }
 }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MainPageLayout(
-//       bodyContent: _isPoolSelected
-//           ? PoolDetailsView(pool: _selectedPool!, goBack: _goBackToList)
-//           : PoolListView(pools: pools, selectPool: _selectPool),
-//     );
-//   }
-// }
+class PoolListView extends StatelessWidget {
+  final List<String> pools;
+  final Function(String, String) selectPool;
 
-// class PoolListView extends StatelessWidget {
-//   final List<String> pools;
-//   final Function(String) selectPool;
+  const PoolListView({
+    required this.pools,
+    required this.selectPool,
+    super.key,
+  });
 
-//   const PoolListView(
-//       {required this.pools, required this.selectPool, super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       children: [
-//         Text(
-//           'My Pools',
-//           style: QualityPoolTextstyle(context).blackbodyText,
-//         ),
-//         SizedBox(height: 20),
-//         // List of pools
-//         Expanded(
-//           child: ListView.builder(
-//             itemCount: pools.length,
-//             itemBuilder: (context, index) {
-//               return ListTile(
-//                 title: Text(
-//                   pools[index],
-//                   style: QualityPoolTextstyle(context).blackbodyText,
-//                 ),
-//                 onTap: () => selectPool(pools[index]), // Select pool
-//               );
-//             },
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'My Pools',
+          style: QualityPoolTextstyle(context).pageTitle,
+        ),
+        SizedBox(height: 20),
+        Expanded(
+          child: ListView.builder(
+            itemCount: pools.length,
+            itemBuilder: (context, index) {
+              return PoolHomepageContainer(
+                imageUrl:
+                    'images/poolImage.png', // Replace with your pool image URL
+                poolName: pools[index],
+                onEdit: () => selectPool(
+                    pools[index], 'images/poolImage.png'), // Pass image URL
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

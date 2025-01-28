@@ -33,7 +33,7 @@ class Navbar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const MyPools(),
+                builder: (context) => MyPools(),
               ),
             );
             break;
