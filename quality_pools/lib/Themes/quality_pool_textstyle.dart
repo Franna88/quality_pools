@@ -51,6 +51,12 @@ class QualityPoolTextstyle {
         color: Colors.black,
       );
 
+  TextStyle get blackStyleMedium => GoogleFonts.judson(
+        fontSize: width / 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      );
+
   TextStyle get blackbodyText => GoogleFonts.nunito(
         fontSize: width / 26,
         fontWeight: FontWeight.w500,
