@@ -62,7 +62,8 @@ class MainPageLayout extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 32),
                   child:
                       bodyContent, // This will be the content passed to the layout
                 ),

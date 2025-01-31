@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
+import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/HomePage/home_page.dart';
 import 'package:quality_pools/Login/loginPage.dart';
 import 'package:quality_pools/Register/register.dart';
@@ -80,6 +81,7 @@ class _LandingPageState extends State<LandingPage> {
               },
             ),
             Spacer(),
+
           ],
         ),
       ),

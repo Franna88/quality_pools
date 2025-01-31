@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/my_utility.dart';
-import 'package:quality_pools/MyPools/delete_course_popup.dart';
+import 'package:quality_pools/MyPools/PoolMainPage/delete_pool_popup.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/Themes/quality_pools_colors.dart';
 
-class PoolHomepageContainer extends StatelessWidget {
+class PoolListingContainers extends StatelessWidget {
   final String imageUrl;
   final String poolName;
   final VoidCallback onEdit;
 
-  const PoolHomepageContainer({
+  const PoolListingContainers({
     Key? key,
     required this.imageUrl,
     required this.poolName,
@@ -31,7 +31,6 @@ class PoolHomepageContainer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
         width: MyUtility(context).width * 0.9,
-        height: MyUtility(context).height * 0.315,
         decoration: BoxDecoration(
           color: MyColors().lightGrey,
           borderRadius: const BorderRadius.only(
@@ -72,12 +71,13 @@ class PoolHomepageContainer extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        width: MyUtility(context).width * 0.1,
-                        height: MyUtility(context).width * 0.1,
+                        width: MyUtility(context).height * 0.05,
+                        height: MyUtility(context).height * 0.05,
                         child: IconButton(
                           icon: Icon(
                             Icons.mode_edit_outline_outlined,
                             color: MyColors().lightBlue,
+                            size: MyUtility(context).height * 0.03,
                           ),
                           onPressed: onEdit,
                         ),
@@ -106,12 +106,13 @@ class PoolHomepageContainer extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        width: MyUtility(context).width * 0.1,
-                        height: MyUtility(context).width * 0.1,
+                        width: MyUtility(context).height * 0.05,
+                        height: MyUtility(context).height * 0.05,
                         child: IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.delete_outline_outlined,
                             color: Colors.red,
+                            size: MyUtility(context).height * 0.03,
                           ),
                           onPressed: () => _openDeletCoursePopup(context),
                         ),

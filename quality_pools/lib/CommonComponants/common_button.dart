@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 class CommonButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
+  final double? customWidth;
 
   const CommonButton({
     Key? key,
     required this.buttonText,
     required this.onPressed,
+    this.customWidth,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      width: screenWidth * 0.6,
+      width: customWidth ?? screenWidth * 0.6,
       decoration: BoxDecoration(
         color: const Color(0XFF1A8CF0),
         borderRadius: BorderRadius.circular(18.0),

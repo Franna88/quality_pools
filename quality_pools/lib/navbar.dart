@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/HomePage/home_page.dart';
 import 'package:quality_pools/LandingPage/landing_page.dart';
-import 'package:quality_pools/MyPools/my_pools.dart';
+import 'package:quality_pools/MyPools/PoolMainPage/my_pools.dart';
 import 'package:quality_pools/main_page_layout.dart';
 import 'package:quality_pools/Settings/settings_tab.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';

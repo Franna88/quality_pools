@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
-import 'package:quality_pools/MyPools/pool_notes.dart';
-import 'package:quality_pools/MyPools/view_pool_current_readings.dart';
+import 'package:quality_pools/CommonComponants/reusable_grey_results_container.dart';
+import 'package:quality_pools/MyPools/PoolNotes/pool_notes.dart';
+import 'package:quality_pools/MyPools/PoolRecords/pool_records.dart';
+
+import 'package:quality_pools/PoolReadingsReusables/pool_readings.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/main_page_layout.dart';
 
@@ -55,15 +58,23 @@ class ViewPools extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            ViewPoolCurrentReadings(
-              poolName: poolName,
-              lastReadingDate: lastReadingDate,
-              nextReadingDate: nextReadingDate,
-            ),
+            PoolReadings(),
+            SizedBox(height: 20),
+            ReusableGreyResultsContainer(
+                description: 'Last Reading Date', result: lastReadingDate),
+            ReusableGreyResultsContainer(
+                description: 'Next Reading Date', result: nextReadingDate),
             SizedBox(height: 50),
             ReusableGradientButton(text: 'Test Pool', onTap: () {}),
             SizedBox(height: 20),
-            ReusableGradientButton(text: 'My Pool Records', onTap: () {}),
+            ReusableGradientButton(
+                text: 'My Pool Records',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PoolRecords()),
+                  );
+                }),
             SizedBox(height: 20),
             ReusableGradientButton(
                 text: 'My Pool Notes',
