@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
-import 'package:quality_pools/MyPools/notes_container.dart';
-import 'package:quality_pools/MyPools/post_note_popup.dart';
+import 'package:quality_pools/MyPools/PoolNotes/notes_container.dart';
+import 'package:quality_pools/MyPools/PoolNotes/post_note_popup.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/main_page_layout.dart';
 

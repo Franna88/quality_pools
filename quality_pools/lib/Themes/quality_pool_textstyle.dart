@@ -2,82 +2,87 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QualityPoolTextstyle {
-  BuildContext context;
+  final BuildContext context;
   QualityPoolTextstyle(this.context);
 
   double get width => MediaQuery.of(context).size.width;
+  double get textScale => MediaQuery.of(context).textScaleFactor;
+
+  double responsiveSize(double baseSize) {
+    return (width / baseSize).clamp(12.0, 60.0) * textScale;
+  }
+
   // Header Styles
   TextStyle get header1 => GoogleFonts.judson(
-        fontSize: width / 6.5,
+        fontSize: responsiveSize(2),
         fontWeight: FontWeight.normal,
         color: Colors.white,
       );
 
   TextStyle get header2 => GoogleFonts.judson(
-        fontSize: width / 9,
+        fontSize: responsiveSize(4),
         fontWeight: FontWeight.normal,
         color: Colors.white,
       );
 
   TextStyle get pageTitle => GoogleFonts.judson(
-        fontSize: width / 14,
+        fontSize: responsiveSize(14),
         fontWeight: FontWeight.w500,
         color: Colors.black,
         shadows: [
           Shadow(
-            offset: Offset(2.0, 2.0), // Horizontal and vertical offset
-            blurRadius: 3.0, // Blur radius
-            color: Colors.grey, // Shadow color
+            offset: const Offset(2.0, 2.0),
+            blurRadius: 3.0,
+            color: Colors.grey,
           ),
         ],
       );
 
   TextStyle get readingType => GoogleFonts.nunito(
-        fontSize: width / 20,
+        fontSize: responsiveSize(24),
         fontWeight: FontWeight.bold,
         color: Colors.white,
       );
 
   // Body Text Styles
   TextStyle get whitebodyText => GoogleFonts.nunito(
-        fontSize: width / 26,
+        fontSize: responsiveSize(26),
         fontWeight: FontWeight.w600,
         color: Colors.white,
       );
 
   TextStyle get blackSubheaderText => GoogleFonts.nunito(
-        fontSize: width / 20,
+        fontSize: responsiveSize(20),
         fontWeight: FontWeight.w500,
         color: Colors.black,
       );
 
   TextStyle get blackStyleMedium => GoogleFonts.judson(
-        fontSize: width / 20,
+        fontSize: responsiveSize(20),
         fontWeight: FontWeight.w600,
         color: Colors.black,
       );
 
   TextStyle get blackbodyText => GoogleFonts.nunito(
-        fontSize: width / 26,
+        fontSize: responsiveSize(26),
         fontWeight: FontWeight.w500,
         color: Colors.black,
       );
 
   TextStyle get blackStyleBody => GoogleFonts.judson(
-        fontSize: width / 26,
+        fontSize: responsiveSize(26),
         fontWeight: FontWeight.w600,
         color: Colors.black,
       );
 
-  // Body Text Styles
   TextStyle get whiteStyleBody => GoogleFonts.judson(
-        fontSize: width / 20,
+        fontSize: responsiveSize(18),
         fontWeight: FontWeight.w600,
         color: Colors.white,
       );
 
   TextStyle get smallText => GoogleFonts.nunito(
-        fontSize: width / 34,
+        fontSize: responsiveSize(34),
         fontWeight: FontWeight.normal,
         color: Colors.white,
       );
@@ -89,7 +94,7 @@ class QualityPoolTextstyle {
     Color color = Colors.white,
   }) {
     return GoogleFonts.judson(
-      fontSize: fontSize,
+      fontSize: responsiveSize(fontSize),
       fontWeight: fontWeight,
       color: color,
     );

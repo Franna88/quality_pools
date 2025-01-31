@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/CommonComponants/blue_page_layout.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/pooIInfo.dart';
+import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
-
-
+import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
+import 'package:quality_pools/Themes/quality_pools_colors.dart';
 
 class AddPoolImage extends StatefulWidget {
   const AddPoolImage({super.key});
@@ -15,54 +17,46 @@ class AddPoolImage extends StatefulWidget {
 class _AddPoolImageState extends State<AddPoolImage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0XFF1A8CF0),
-              Color(0XFF095BB2),
-              Color(0xFF002A6A),
-            ],
+    return BluePageLayout(
+      pageContents: [
+        Text(
+          'Add Pool',
+          style: QualityPoolTextstyle(context).whiteStyleBody,
+        ),
+        InkWell(
+          onTap: () {
+            // Add functionality when tapped
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: MyColors().lightBlue.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: MyColors().lightBlue, width: 2),
+                ),
+              ),
+            ),
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            QualityPoolHeader(),
-                SizedBox(height: 20), // Add spacing between text and buttons
-                            CommonButton(
-              buttonText: 'Select Image',
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddPoolInfo(),
-                    ),);
-              },
-            ),
-             SizedBox(height: 20), // Add spacing between text and buttons
-                            CommonButton(
-              buttonText: 'Continue',
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddPoolInfo(),
-                    ),);
-              },
-            ),
-          
-            
-            
-          ],
+        CommonButton(
+          buttonText: 'Select Image',
+          onPressed: () {
+            // Add functionality here
+          },
         ),
-      ),
+      ],
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AddPoolInfo(),
+          ),
+        );
+      },
+      buttonText: 'Continue',
     );
   }
 }

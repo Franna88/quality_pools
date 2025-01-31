@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/augement_measure_pool.dart';
+import 'package:quality_pools/CommonComponants/blue_page_layout.dart';
 import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
-import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
+import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
+import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 
 class AddPoolInfo extends StatelessWidget {
   const AddPoolInfo({super.key});
@@ -14,79 +17,56 @@ class AddPoolInfo extends StatelessWidget {
     final TextEditingController _lowestDepth = TextEditingController();
     final TextEditingController _highestDepth = TextEditingController();
 
-    //GlobalKey for form validation
+    // GlobalKey for form validation
     final _formKey = GlobalKey<FormState>();
 
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0XFF1A8CF0),
-              Color(0XFF095BB2),
-              Color(0xFF002A6A),
+    return BluePageLayout(
+      pageContents: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Text(
+            'Add Pool',
+            style: QualityPoolTextstyle(context).whiteStyleBody,
+          ),
+        ),
+        Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ReusableTextField(
+                hintText: 'Name',
+                controller: _poolName,
+                labelText: 'Pool Name',
+                imagePath: 'images/pen.png',
+              ),
+              SizedBox(height: 20),
+              ReusableTextField(
+                hintText: '2m',
+                controller: _lowestDepth,
+                labelText: 'Lowest Depth',
+                imagePath: 'images/pen.png',
+              ),
+              SizedBox(height: 20),
+              ReusableTextField(
+                hintText: '5m',
+                controller: _highestDepth,
+                labelText: 'Highest Depth',
+                imagePath: 'images/pen.png',
+              ),
             ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 30),
-            QualityPoolHeader(),
-            SizedBox(height: 30),
-            SizedBox(
-              width: screenWidth * 0.8,
-              child: Form(
-                  key: _formKey,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        ReusableTextField(
-                          hintText: 'Name',
-                          controller: _poolName,
-                          labelText: 'Pool Name',
-                          imagePath: 'images/email.png',
-                        ),
-                        SizedBox(height: 20),
-                        ReusableTextField(
-                          hintText: '2m',
-                          controller: _lowestDepth,
-                          labelText: 'Lowest Depth',
-                          imagePath: 'images/password.png',
-                          obscureText: true,
-                        ),
-                        SizedBox(height: 20),
-                        ReusableTextField(
-                          hintText: '5m',
-                          controller: _highestDepth,
-                          labelText: 'Highest Depth',
-                          imagePath: 'images/password.png',
-                          obscureText: true,
-                        ),
-
-                        SizedBox(
-                            height: 50), // Add spacing between text and buttons
-                        CommonButton(
-                          buttonText: 'Continue',
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AddPoolInfo(),
-                              ),
-                            );
-                          },
-                        ),
-                      ])),
-            )
-          ],
-        ),
-      ),
+      ],
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AugementMeasurePool(),
+          ),
+        );
+      },
+      buttonText: 'Continue',
     );
   }
 }
