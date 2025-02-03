@@ -61,7 +61,7 @@ class _BluePageLayoutState extends State<BluePageLayout> {
               ),
               CommonButton(
                   buttonText: widget.buttonText, onPressed: widget.onTap),
-              SizedBox(height: MyUtility(context).width * 0.1)
+              SizedBox(height: MyUtility(context).height * 0.02)
             ],
           ),
         ),

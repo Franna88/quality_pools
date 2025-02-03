@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/CommonComponants/reusable_grey_results_container.dart';
 import 'package:quality_pools/MyPools/PoolNotes/pool_notes.dart';
 import 'package:quality_pools/MyPools/PoolRecords/pool_records.dart';
+import 'package:quality_pools/MyPools/TestPool/reusable_results_container.dart';
 import 'package:quality_pools/MyPools/TestPool/test_pool.dart';
 
 import 'package:quality_pools/PoolReadingsReusables/pool_readings.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/main_page_layout.dart';
 
-class ViewPools extends StatelessWidget {
-  final String poolName;
-  final String poolImageUrl;
-  final String lastReadingDate = 'Mon, 2 Feb';
-  final String nextReadingDate = 'Mon, 16 Feb';
+class TestResults extends StatelessWidget {
+  final String poolName = 'Pool 1';
+  final String poolImageUrl = 'images/pool_test_strip.png';
 
-  const ViewPools({
-    required this.poolName,
-    required this.poolImageUrl,
+  const TestResults({
     super.key,
   });
 
@@ -26,7 +24,7 @@ class ViewPools extends StatelessWidget {
     return MainPageLayout(
       bodyContent: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -46,7 +44,7 @@ class ViewPools extends StatelessWidget {
                 SizedBox(width: 20)
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: MyUtility(context).height * 0.02),
             ClipRRect(
               borderRadius: const BorderRadius.all(
                 Radius.circular(16.0),
@@ -58,34 +56,63 @@ class ViewPools extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: MyUtility(context).height * 0.02),
             PoolReadings(),
-            SizedBox(height: 20),
-            ReusableGreyResultsContainer(
-                description: 'Last Reading Date', result: lastReadingDate),
-            ReusableGreyResultsContainer(
-                description: 'Next Reading Date', result: nextReadingDate),
-            SizedBox(height: 50),
+            SizedBox(height: MyUtility(context).height * 0.05),
+            Text(
+              'Possible fixes for the following:',
+              style: QualityPoolTextstyle(context).blackStyleMedium,
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(height: MyUtility(context).height * 0.02),
+            ReusableResultsContainer(
+              causes: [
+                'Insufficient sanitizer',
+                'High pool usage',
+                'Organic contaminants',
+              ],
+              fixes: [
+                'Add liquid chlorine or granular chlorine.',
+                'Shock the pool with a chlorine-based shock treatment.',
+                'Check stabilizer (CyA) levels to ensure chlorine efficiency.',
+              ],
+              readingType: 'FCI',
+              lowHigh: 'Low',
+            ),
+            ReusableResultsContainer(
+              causes: [
+                'Over-chlorination',
+                'Recent shocking',
+              ],
+              fixes: [
+                'Dilute pool water by partially draining and refilling.',
+                'Use a chlorine neutralizer',
+                'Allow time for chlorine to dissipate naturally under sunlight.',
+              ],
+              readingType: 'FCI',
+              lowHigh: 'High',
+            ),
+            SizedBox(height: MyUtility(context).height * 0.02),
             ReusableGradientButton(
-                text: 'Test Pool',
+                text: 'Create a Note',
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TestPool()),
                   );
                 }),
-            SizedBox(height: 20),
+            SizedBox(height: MyUtility(context).height * 0.02),
             ReusableGradientButton(
-                text: 'My Pool Records',
+                text: 'Redo Analysis',
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => PoolRecords()),
                   );
                 }),
-            SizedBox(height: 20),
+            SizedBox(height: MyUtility(context).height * 0.02),
             ReusableGradientButton(
-                text: 'My Pool Notes',
+                text: 'Save Results',
                 onTap: () {
                   Navigator.push(
                     context,

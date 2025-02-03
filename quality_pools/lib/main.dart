@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
 import 'package:quality_pools/LandingPage/landing_page.dart';
+import 'package:quality_pools/MyPools/TestPool/test_pool.dart';
 import 'package:quality_pools/Register/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -29,6 +30,6 @@ void main() async {
     print("Error initializing Firebase: $e");
   }
   runApp(MaterialApp(
-    home: Scaffold(body: const LandingPage()),
+    home: Scaffold(body: const TestPool()),
   ));
 }
