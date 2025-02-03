@@ -27,13 +27,13 @@ class QualityPoolTextstyle {
 
   TextStyle get pageTitle => GoogleFonts.judson(
         fontSize: responsiveSize(14),
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w800,
         color: Colors.black,
         shadows: [
           Shadow(
             offset: const Offset(2.0, 2.0),
-            blurRadius: 3.0,
-            color: Colors.grey,
+            blurRadius: 4.0,
+            color: Colors.grey.shade400,
           ),
         ],
       );

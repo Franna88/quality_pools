@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/CommonComponants/reusable_grey_results_container.dart';
+import 'package:quality_pools/MyPools/PoolMainPage/my_pools.dart';
 import 'package:quality_pools/MyPools/PoolNotes/pool_notes.dart';
 import 'package:quality_pools/MyPools/PoolRecords/pool_records.dart';
 import 'package:quality_pools/MyPools/TestPool/reusable_results_container.dart';
 import 'package:quality_pools/MyPools/TestPool/test_pool.dart';
-
 import 'package:quality_pools/PoolReadingsReusables/pool_readings.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/main_page_layout.dart';
@@ -30,10 +30,6 @@ class TestResults extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 20,
-                  child: IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icon(Icons.arrow_back_ios),
-                  ),
                 ),
                 Spacer(),
                 Text(
@@ -92,13 +88,13 @@ class TestResults extends StatelessWidget {
               readingType: 'FCI',
               lowHigh: 'High',
             ),
-            SizedBox(height: MyUtility(context).height * 0.02),
+            SizedBox(height: MyUtility(context).height * 0.04),
             ReusableGradientButton(
                 text: 'Create a Note',
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TestPool()),
+                    MaterialPageRoute(builder: (context) => PoolNotes()),
                   );
                 }),
             SizedBox(height: MyUtility(context).height * 0.02),
@@ -107,16 +103,40 @@ class TestResults extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PoolRecords()),
+                    MaterialPageRoute(builder: (context) => TestPool()),
                   );
                 }),
-            SizedBox(height: MyUtility(context).height * 0.02),
+            SizedBox(height: MyUtility(context).height * 0.05),
             ReusableGradientButton(
                 text: 'Save Results',
-                onTap: () {
+                useCustomGreen: true,
+                onTap: () async {
+                  // Show the loading screen
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.green),
+                        ),
+                      );
+                    },
+                  );
+
+                  // Wait for 3 seconds and then navigate to MyPools
+                  await Future.delayed(Duration(seconds: 3));
+
+                  // Close the loading dialog
+                  Navigator.of(context).pop();
+
+                  // Navigate to MyPools page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PoolNotes()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            MyPools()), // Replace with your MyPools() widget
                   );
                 }),
             SizedBox(height: 30),

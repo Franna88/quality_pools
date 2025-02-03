@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:quality_pools/CommonComponants/my_utility.dart';
@@ -18,24 +20,27 @@ class PoolNotes extends StatefulWidget {
 
 class _PoolNotesState extends State<PoolNotes> {
   String? selectedMonth;
-  List<Map<String, String>> notes = [];
+  List<Map<String, dynamic>> notes =
+      []; // Change the type of the list to hold dynamic data
+
   TextEditingController noteController = TextEditingController();
 
+  bool isPhotoAdded = false; // Track if photo is added
+
   // Function to add a new note
-  void addNote() {
+  void addNote({Uint8List? imageData}) {
     if (noteController.text.isNotEmpty) {
-      // Get current date and format it
       String formattedDate = DateFormat('d MMM yyyy').format(DateTime.now());
-      String monthYear = DateFormat('MMMM yyyy')
-          .format(DateTime.now()); // Extract month and year
+      String monthYear = DateFormat('MMMM yyyy').format(DateTime.now());
 
       setState(() {
         notes.add({
-          'date': formattedDate, // Use the formatted current date
-          'monthYear': monthYear, // Store month and year for filtering
+          'date': formattedDate,
+          'monthYear': monthYear,
           'noteText': noteController.text,
+          'imageData': imageData, // Store the imageData (Uint8List?)
         });
-        noteController.clear(); // Clear the text field after adding the note
+        noteController.clear();
       });
     }
   }
@@ -44,16 +49,21 @@ class _PoolNotesState extends State<PoolNotes> {
   void showNewNoteDialog() {
     showDialog(
       context: context,
-      barrierDismissible: false, // Prevent closing by tapping outside
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return PostNotePopup(
           noteController: noteController,
-          onPostNote: () {
-            addNote(); // Post the note
-            Navigator.pop(context); // Close the dialog
+          onPostNote: (Uint8List? imageData) {
+            addNote(imageData: imageData); // Pass imageData as a named argument
+            Navigator.pop(context);
           },
           onCancel: () {
-            Navigator.pop(context); // Close the dialog without adding a note
+            Navigator.pop(context);
+          },
+          onImageAdded: (bool value) {
+            setState(() {
+              isPhotoAdded = value;
+            });
           },
         );
       },
@@ -61,13 +71,13 @@ class _PoolNotesState extends State<PoolNotes> {
   }
 
   // Function to filter notes by selected month
-  List<Map<String, String>> getFilteredNotes() {
+  List<Map<String, dynamic>> getFilteredNotes() {
     if (selectedMonth == null || selectedMonth!.isEmpty) {
-      return notes; // If no month is selected, return all notes
+      return notes;
     } else {
       return notes.where((note) {
         String noteMonth = note['monthYear']!;
-        return noteMonth.startsWith(selectedMonth!); // Filter by selected month
+        return noteMonth.startsWith(selectedMonth!);
       }).toList();
     }
   }
@@ -178,22 +188,22 @@ class _PoolNotesState extends State<PoolNotes> {
 
             // Displaying the list of filtered notes
             SizedBox(height: 20),
-            ...getFilteredNotes()
-                .asMap()
-                .map((index, note) {
-                  return MapEntry(
-                    index,
-                    NotesContainer(
-                      date: note['date']!,
-                      noteText: note['noteText']!,
-                      onDelete: () => deleteNote(index),
-                      onEdit: (newText) =>
-                          editNoteText(index, newText), // Pass edit function
-                    ),
-                  );
-                })
-                .values
-                .toList(),
+            Column(
+              children: getFilteredNotes().asMap().entries.map((entry) {
+                int index = entry.key;
+                Map<String, dynamic> note = entry.value;
+
+                return NotesContainer(
+                  date: note['date']!,
+                  noteText: note['noteText']!,
+                  isPhotoAdded:
+                      note['imageData'] != null, // Check if there's image data
+                  imageData: note['imageData'], // Pass Uint8List directly
+                  onDelete: () => deleteNote(index),
+                  onEdit: (newText) => editNoteText(index, newText),
+                );
+              }).toList(),
+            ),
           ],
         ),
       ),
