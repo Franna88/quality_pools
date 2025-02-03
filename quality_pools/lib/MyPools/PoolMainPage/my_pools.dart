@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quality_pools/AddPool/poolImage.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/MyPools/PoolMainPage/pool_listing_containers.dart';
 import 'package:quality_pools/MyPools/PoolMainPage/view_pools.dart';
@@ -85,7 +86,12 @@ class PoolListView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ReusableGradientButton(
               text: 'Add New Pool',
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddPoolImage()),
+                );
+              },
             ),
           ),
         ),
