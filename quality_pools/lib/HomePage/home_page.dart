@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/HomePage/homepage_recent_readings.dart';
+import 'package:quality_pools/Themes/quality_pools_colors.dart';
 import 'package:quality_pools/main_page_layout.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 
@@ -44,35 +47,18 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Left Arrow
-                Container(
-                  width: MediaQuery.of(context).size.width *
-                      0.1, // Adjusted width to 1%
-                  height: MediaQuery.of(context).size.height *
-                      0.05, // Adjusted height to 7%
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade400,
-                        blurRadius: 1,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios,
-                          size: 18, color: Colors.black),
-                      onPressed: () {
-                        if (pageController.hasClients) {
-                          pageController.previousPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                    ),
+                Center(
+                  child: IconButton(
+                    icon: Icon(Icons.keyboard_double_arrow_left,
+                        size: 50, color: MyColors().darkBlue),
+                    onPressed: () {
+                      if (pageController.hasClients) {
+                        pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
                   ),
                 ),
 
@@ -80,48 +66,39 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Container(
-                    width: 3,
+                    width: 6,
                     height: MediaQuery.of(context).size.height *
                         0.05, // Adjusted height to 7%
-                    color: Colors.grey.shade400,
+                    color: Colors.grey.shade200,
                   ),
                 ),
 
                 // Right Arrow
-                Container(
-                  width: MediaQuery.of(context).size.width *
-                      0.1, // Adjusted width to 1%
-                  height: MediaQuery.of(context).size.height *
-                      0.05, // Adjusted height to 7%
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade400,
-                        blurRadius: 1,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_forward_ios,
-                          size: 18, color: Colors.black),
-                      onPressed: () {
-                        if (pageController.hasClients) {
-                          pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                    ),
+                Center(
+                  child: IconButton(
+                    icon: Icon(Icons.keyboard_double_arrow_right,
+                        size: 50, color: MyColors().darkBlue),
+                    onPressed: () {
+                      if (pageController.hasClients) {
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
                   ),
                 ),
               ],
             ),
           ),
+          // Container(
+          //   width: MyUtility(context).width,
+          //   height: MyUtility(context).width * 0.2,
+          //   child: Center(
+          //     child: Lottie.network(
+          //         'https://lottie.host/2c72ae92-f834-4c00-bba1-19352a6dc03a/EX6egWXuPl.lottie'),
+          //   ),
+          // ),
           const SizedBox(height: 20),
           ReusableGradientButton(text: 'Test Pool', onTap: () {}),
           const SizedBox(height: 10),

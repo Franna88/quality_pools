@@ -4,27 +4,40 @@ import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 class ReusableGradientButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
+  final bool
+      useCustomGreen; // Optional flag to choose the custom green gradient
 
   const ReusableGradientButton({
     Key? key,
     required this.text,
     required this.onTap,
+    this.useCustomGreen = false, // Default is false for the blue gradient
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Conditional gradient based on the useCustomGreen flag
+    final gradient = useCustomGreen
+        ? LinearGradient(
+            colors: [
+              Color.fromARGB(255, 109, 214, 112), // Custom green gradient start
+              Color(0XFF388E3C), // Custom green gradient end
+            ],
+          )
+        : LinearGradient(
+            colors: [
+              Color(0XFF1A8CF0), // Blue gradient start
+              Color(0XFF095BB2), // Blue gradient end
+            ],
+          );
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         height: MediaQuery.of(context).size.height * 0.06,
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0XFF1A8CF0),
-              Color(0XFF095BB2),
-            ],
-          ),
+          gradient: gradient,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade400,

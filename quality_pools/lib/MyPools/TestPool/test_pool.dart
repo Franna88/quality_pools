@@ -61,7 +61,27 @@ class TestPool extends StatelessWidget {
                 },
               ),
             ],
-            onTap: () {
+            onTap: () async {
+              // Show the loading screen
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                    ),
+                  );
+                },
+              );
+
+              // Wait for 3 seconds and then navigate to TestResults
+              await Future.delayed(Duration(seconds: 3));
+
+              // Close the loading dialog
+              Navigator.of(context).pop();
+
+              // Navigate to TestResults page
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => TestResults()),
