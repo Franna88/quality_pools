@@ -4,6 +4,7 @@ import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/AddPool/poolImage.dart';
 import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
+import 'package:quality_pools/MyPools/PoolMainPage/my_pools.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 
 class AugementMeasureResults extends StatelessWidget {
@@ -68,8 +69,33 @@ class AugementMeasureResults extends StatelessWidget {
           ),
         ),
       ],
-      onTap: () {},
-      buttonText: 'Continue',
+      onTap: () async {
+        // Show the loading screen
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+              ),
+            );
+          },
+        );
+
+        // Wait for 3 seconds and then navigate to TestResults
+        await Future.delayed(Duration(seconds: 3));
+
+        // Close the loading dialog
+        Navigator.of(context).pop();
+
+        // Navigate to TestResults page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyPools()),
+        );
+      },
+      buttonText: 'Save',
     );
   }
 }
