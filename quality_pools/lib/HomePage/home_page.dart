@@ -3,6 +3,8 @@ import 'package:lottie/lottie.dart';
 import 'package:quality_pools/CommonComponants/my_utility.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/HomePage/homepage_recent_readings.dart';
+import 'package:quality_pools/MyPools/PoolRecords/pool_records.dart';
+import 'package:quality_pools/MyPools/TestPool/test_pool.dart';
 import 'package:quality_pools/Themes/quality_pools_colors.dart';
 import 'package:quality_pools/main_page_layout.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
@@ -100,9 +102,23 @@ class HomePage extends StatelessWidget {
           //   ),
           // ),
           const SizedBox(height: 20),
-          ReusableGradientButton(text: 'Test Pool', onTap: () {}),
+          ReusableGradientButton(
+              text: 'Test Pool',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TestPool()),
+                );
+              }),
           const SizedBox(height: 10),
-          ReusableGradientButton(text: 'My Pool Records', onTap: () {}),
+          ReusableGradientButton(
+              text: 'My Pool Records',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PoolRecords()),
+                );
+              }),
         ],
       ),
     );
