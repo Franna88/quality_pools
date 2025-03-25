@@ -4,6 +4,7 @@ import 'package:quality_pools/CommonComponants/reusable_dropdown.dart';
 import 'package:quality_pools/CommonComponants/reusable_gradient_button.dart';
 import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
 import 'package:quality_pools/Login/loginPage.dart';
+import 'package:quality_pools/Services/service_status_screen.dart';
 
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
 import 'package:quality_pools/navbar.dart';
@@ -38,8 +39,43 @@ class _SettingsTabState extends State<SettingsTab> {
             'Settings',
             style: QualityPoolTextstyle(context).pageTitle,
           ),
-          Spacer(),
-          // Add the content specific to SettingsTab here
+          const SizedBox(height: 20),
+          // Add advanced settings section with service status
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Advanced Settings',
+                  style: QualityPoolTextstyle(context).blackStyleMedium,
+                ),
+                const SizedBox(height: 10),
+                ListTile(
+                  leading: const Icon(Icons.analytics_outlined,
+                      color: Color(0XFF095BB2)),
+                  title: Text('Service Status',
+                      style: QualityPoolTextstyle(context).blackbodyText),
+                  subtitle:
+                      const Text('Check PDF and AI services configuration'),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ServiceStatusScreen()),
+                    );
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: Colors.grey.shade300),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          // Add the Pool Test Reminder section
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -66,7 +102,7 @@ class _SettingsTabState extends State<SettingsTab> {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Form(
               key: _formKey,
               child: Container(

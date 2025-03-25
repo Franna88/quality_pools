@@ -16,20 +16,31 @@ class ReusableGradientButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if the button is disabled (empty function)
+    final isDisabled = onTap.toString() == '() {}';
+
     // Conditional gradient based on the useCustomGreen flag
-    final gradient = useCustomGreen
+    final gradient = isDisabled
         ? LinearGradient(
             colors: [
-              Color.fromARGB(255, 109, 214, 112), // Custom green gradient start
-              Color(0XFF388E3C), // Custom green gradient end
+              Colors.grey.shade400,
+              Colors.grey.shade600,
             ],
           )
-        : LinearGradient(
-            colors: [
-              Color(0XFF1A8CF0), // Blue gradient start
-              Color(0XFF095BB2), // Blue gradient end
-            ],
-          );
+        : useCustomGreen
+            ? LinearGradient(
+                colors: [
+                  Color.fromARGB(
+                      255, 109, 214, 112), // Custom green gradient start
+                  Color(0XFF388E3C), // Custom green gradient end
+                ],
+              )
+            : LinearGradient(
+                colors: [
+                  Color(0XFF1A8CF0), // Blue gradient start
+                  Color(0XFF095BB2), // Blue gradient end
+                ],
+              );
 
     return GestureDetector(
       onTap: onTap,
@@ -50,7 +61,9 @@ class ReusableGradientButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: QualityPoolTextstyle(context).whiteStyleBody,
+            style: QualityPoolTextstyle(context).whiteStyleBody.copyWith(
+                  color: isDisabled ? Colors.grey.shade300 : Colors.white,
+                ),
           ),
         ),
       ),

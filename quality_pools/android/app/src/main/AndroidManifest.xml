@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Add internet permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
     <application
         android:label="quality_pools"
-        android:name="${applicationName}"
+        android:name="com.app.quality_pools.QualityPoolsApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
