@@ -1,0 +1,2 @@
+/Users/frannanortje/development/dev/quality_pools-1/quality_pools/android/app/.cxx/Debug/2g5f2r5t/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/frannanortje/development/dev/quality_pools-1/quality_pools/android/app/.cxx/Debug/2g5f2r5t/armeabi-v7a/CMakeFiles/rebuild_cache.dir

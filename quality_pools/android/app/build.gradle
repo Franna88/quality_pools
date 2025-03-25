@@ -11,15 +11,18 @@ plugins {
 android {
     namespace = "com.app.quality_pools"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        // For using Java 8+ APIs
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
     }
 
     defaultConfig {
@@ -27,10 +30,11 @@ android {
         applicationId = "com.app.quality_pools"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -40,6 +44,40 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        checkReleaseBuilds false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
+dependencies {
+    // Core library desugaring for Java 8+ APIs
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    
+    // Add the dependency for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:32.7.4')
+    
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-storage'
+    
+    // Multidex support
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
 flutter {

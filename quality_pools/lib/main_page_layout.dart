@@ -3,6 +3,7 @@ import 'package:quality_pools/CommonComponants/common_button.dart';
 import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
 import 'package:quality_pools/navbar.dart';
 import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
+import 'package:quality_pools/Services/service_status_screen.dart';
 
 class MainPageLayout extends StatelessWidget {
   final Widget bodyContent;
@@ -74,4 +75,21 @@ class MainPageLayout extends StatelessWidget {
       ),
     );
   }
+}
+
+// Add a menu item to access the service status screen
+// This could be in a drawer, app bar, or settings page
+
+// Example for an app bar action
+IconButton buildServiceStatusButton(BuildContext context) {
+  return IconButton(
+    icon: const Icon(Icons.settings),
+    tooltip: 'Service Status',
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ServiceStatusScreen()),
+      );
+    },
+  );
 }

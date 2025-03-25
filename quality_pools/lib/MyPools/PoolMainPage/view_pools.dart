@@ -14,6 +14,8 @@ class ViewPools extends StatelessWidget {
   final String poolImageUrl;
   final String lastReadingDate = 'Mon, 2 Feb';
   final String nextReadingDate = 'Mon, 16 Feb';
+  // Sample poolId for demonstration
+  final String poolId = 'pool_1';
 
   const ViewPools({
     required this.poolName,
@@ -71,7 +73,12 @@ class ViewPools extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TestPool()),
+                    MaterialPageRoute(
+                      builder: (context) => TestPool(
+                        poolId: poolId,
+                        poolName: poolName,
+                      ),
+                    ),
                   );
                 }),
             SizedBox(height: 20),

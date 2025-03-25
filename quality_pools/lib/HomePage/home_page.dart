@@ -107,7 +107,11 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TestPool()),
+                  MaterialPageRoute(
+                      builder: (context) => TestPool(
+                            poolId: 'pool_1', // Example pool ID
+                            poolName: 'Pool 1', // Example pool name
+                          )),
                 );
               }),
           const SizedBox(height: 10),
