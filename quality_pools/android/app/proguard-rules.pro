@@ -10,8 +10,8 @@
 -keep class com.google.firebase.** { *; }
 -keep class com.google.android.gms.** { *; }
 
-# Play Core library
--keep class com.google.android.play.core.** { *; }
+# Play Services library (replacing Play Core)
+-keep class com.google.android.play.** { *; }
 
 # Keep the Multidex class
 -keep class androidx.multidex.** { *; }
