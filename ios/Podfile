@@ -38,17 +38,38 @@ target 'Runner' do
 end
 
 post_install do |installer|
+  # This removes the problematic '-G' flag
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["OTHER_CFLAGS"] ||= ["$(inherited)"]
+    config.build_settings["OTHER_CFLAGS"].delete("-G")
+  end
+  
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     
-    # Add these lines for iOS compatibility
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      
+      # Fix arch settings
+      config.build_settings['ARCHS[sdk=iphonesimulator*]'] = 'x86_64 arm64'
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = ''
+      
+      # Add required permissions
       config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
         '$(inherited)',
         'PERMISSION_CAMERA=1',
         'PERMISSION_PHOTOS=1',
       ]
+      
+      # Remove the -G flag if present in OTHER_CFLAGS
+      if config.build_settings['OTHER_CFLAGS']
+        other_cflags = config.build_settings['OTHER_CFLAGS']
+        if other_cflags.is_a?(String)
+          config.build_settings['OTHER_CFLAGS'] = other_cflags.gsub(/-G/, '')
+        elsif other_cflags.is_a?(Array)
+          config.build_settings['OTHER_CFLAGS'] = other_cflags.reject { |flag| flag == '-G' }
+        end
+      end
     end
   end
-end
+end 

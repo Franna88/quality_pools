@@ -21,7 +21,7 @@ class LineChartWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Container(
+          child: SizedBox(
             height: MyUtility(context).height * 0.4,
             width: MyUtility(context).width,
             child: LineChart(
@@ -41,11 +41,11 @@ class LineChartWidget extends StatelessWidget {
                 ),
                 titlesData: FlTitlesData(
                   show: true,
-                  topTitles: AxisTitles(
+                  topTitles: const AxisTitles(
                     sideTitles:
                         SideTitles(showTitles: false), // Hide top titles
                   ),
-                  leftTitles: AxisTitles(
+                  leftTitles: const AxisTitles(
                     sideTitles:
                         SideTitles(showTitles: false), // Hide left titles
                   ),
@@ -56,19 +56,19 @@ class LineChartWidget extends StatelessWidget {
                         // Return x-axis months (Jan to Dec), but only every second month
                         switch (value.toInt()) {
                           case 0:
-                            return Text('Jan');
+                            return const Text('Jan');
                           case 2:
-                            return Text('Mar');
+                            return const Text('Mar');
                           case 4:
-                            return Text('May');
+                            return const Text('May');
                           case 6:
-                            return Text('Jul');
+                            return const Text('Jul');
                           case 8:
-                            return Text('Sep');
+                            return const Text('Sep');
                           case 10:
-                            return Text('Nov');
+                            return const Text('Nov');
                           default:
-                            return Text('');
+                            return const Text('');
                         }
                       },
                     ),
@@ -82,15 +82,15 @@ class LineChartWidget extends StatelessWidget {
                         // Display custom right y-axis titles (100k, 200k, 300k, 400k)
                         switch (value.toInt()) {
                           case 100000:
-                            return Text('100k');
+                            return const Text('100k');
                           case 200000:
-                            return Text('200k');
+                            return const Text('200k');
                           case 300000:
-                            return Text('300k');
+                            return const Text('300k');
                           case 400000:
-                            return Text('400k');
+                            return const Text('400k');
                           default:
-                            return Text('');
+                            return const Text('');
                         }
                       },
                     ),
@@ -105,7 +105,7 @@ class LineChartWidget extends StatelessWidget {
                 maxY: 400000, // For 400k
                 lineBarsData: [
                   LineChartBarData(
-                    spots: [
+                    spots: const [
                       FlSpot(0, 100000), // Jan
                       FlSpot(1, 150000), // Feb
                       FlSpot(2, 200000), // Mar
@@ -123,7 +123,7 @@ class LineChartWidget extends StatelessWidget {
                     color: MyColors().red,
                     barWidth: 4,
                     isStrokeCapRound: false,
-                    dotData: FlDotData(show: false), // Hide the dots
+                    dotData: const FlDotData(show: false), // Hide the dots
                   ),
                 ],
               ),

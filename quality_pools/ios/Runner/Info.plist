@@ -24,6 +24,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to take photos of pool test strips and pool images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to select pool images and test strips</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone when recording videos with the camera</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
