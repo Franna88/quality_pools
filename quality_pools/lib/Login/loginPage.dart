@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:quality_pools/CommonComponants/common_button.dart';
-import 'package:quality_pools/CommonComponants/quality_pool_header.dart';
-import 'package:quality_pools/CommonComponants/reusable_textfields.dart';
+import 'package:quality_pools/CommonComponants/modern_button.dart';
+import 'package:quality_pools/CommonComponants/modern_logo.dart';
+import 'package:quality_pools/CommonComponants/modern_text_field.dart';
 import 'package:quality_pools/HomePage/home_page.dart';
+import 'package:quality_pools/Register/register.dart';
 import 'package:quality_pools/ResetPassword/reset_password_otp.dart';
-import 'package:quality_pools/Themes/quality_pool_textstyle.dart';
+import 'package:quality_pools/Themes/modern_theme.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -15,145 +16,218 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+  String? _errorMessage;
+
   @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
-    @override
-    void dispose() {
-      _emailController.dispose();
-      _passwordController.dispose();
-      super.dispose();
-    }
+  void _signIn() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
 
-    void _signIn() async {
-      String email = _emailController.text.trim();
-      String password = _passwordController.text.trim();
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
 
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: password);
-        print("User signed in: ${userCredential.user?.uid}");
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim());
 
-        Navigator.push(
+      if (mounted) {
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
-      } catch (e) {
-        print("Error signing in: $e");
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: ${e.toString()}")),
-        );
+      }
+    } on FirebaseAuthException catch (e) {
+      String message;
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'No user found with this email address.';
+          break;
+        case 'wrong-password':
+          message = 'Wrong password provided.';
+          break;
+        case 'invalid-email':
+          message = 'The email address is not valid.';
+          break;
+        case 'user-disabled':
+          message = 'This user has been disabled.';
+          break;
+        default:
+          message = 'An error occurred. Please try again.';
+      }
+      setState(() {
+        _errorMessage = message;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'An error occurred. Please try again.';
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
+  }
 
-    // GlobalKey for form validation
-    final _formKey = GlobalKey<FormState>();
-
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0XFF1A8CF0),
-              Color(0XFF095BB2),
-              Color(0xFF002A6A),
-            ],
-          ),
+          gradient: ModernTheme.primaryGradient,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Spacer(),
-            QualityPoolHeader(),
-            Spacer(),
-            // Wrap the fields in a Form widget
-            SizedBox(
-              width: screenWidth * 0.8,
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Form(
-                key: _formKey, // Attach the global key
+                key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ReusableTextField(
-                      hintText: 'Enter Email',
+                    const ModernLogo(size: 220),
+                    const SizedBox(height: 40),
+                    Text(
+                      'Welcome Back',
+                      style: ModernTheme.headingStyle(
+                        fontSize: 28,
+                        color: ModernTheme.textLight,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Sign in to continue',
+                      style: ModernTheme.bodyStyle(
+                        fontSize: 16,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    if (_errorMessage != null)
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        margin: const EdgeInsets.only(bottom: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.red.shade50,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: ModernTheme.errorRed),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.error_outline,
+                                color: ModernTheme.errorRed),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                _errorMessage!,
+                                style: ModernTheme.bodyStyle(
+                                    color: ModernTheme.errorRed),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ModernTextField(
+                      label: 'Email',
+                      hint: 'Enter your email',
                       controller: _emailController,
-                      labelText: 'Email',
-                      imagePath: 'images/email.png',
+                      icon: Icons.email_outlined,
+                      keyboardType: TextInputType.emailAddress,
                       validator: (value) {
-                        // Validate email on form submission
                         if (value == null || value.isEmpty) {
-                          return 'Please enter an email';
+                          return 'Please enter your email';
                         }
-                        // Simple email regex validation
                         final emailRegex = RegExp(
                             r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                         if (!emailRegex.hasMatch(value)) {
-                          return 'Please enter a valid email address';
+                          return 'Please enter a valid email';
                         }
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
-                    ReusableTextField(
-                      hintText: 'Enter Password',
+                    ModernTextField(
+                      label: 'Password',
+                      hint: 'Enter your password',
                       controller: _passwordController,
-                      labelText: 'Password',
-                      imagePath: 'images/password.png',
+                      icon: Icons.lock_outline,
                       obscureText: true,
                       validator: (value) {
-                        // Validate password on form submission
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
-                        } else if (value.length < 6) {
-                          return 'Password must be at least 6 characters';
+                          return 'Please enter your password';
                         }
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ResetPasswordOTP(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: QualityPoolTextstyle(context).whitebodyText,
+                    const SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ModernTextButton(
+                        text: 'Forgot Password?',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ResetPasswordOTP(),
+                            ),
+                          );
+                        },
+                        style: ModernTheme.bodyStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 24),
+                    ModernButton(
+                      text: 'Sign In',
+                      onPressed: _signIn,
+                      isLoading: _isLoading,
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account? ",
+                          style: ModernTheme.bodyStyle(color: Colors.white70),
+                        ),
+                        ModernTextButton(
+                          text: 'Sign Up',
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterPage(),
+                              ),
+                            );
+                          },
+                          style: ModernTheme.bodyStyle(
+                            color: ModernTheme.limeGreen,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
-            Spacer(),
-            // Validate the form when the button is pressed
-            CommonButton(
-              buttonText: 'Login',
-              onPressed: () {
-                if (_formKey.currentState?.validate() ?? false) {
-                  // If the form is valid, proceed with login logic
-                  _signIn();
-                  print("Login is valid, proceed with login");
-                  // Implement your login logic here (e.g., Firebase authentication)
-                } else {
-                  print("Form is not valid");
-                }
-              },
-            ),
-            Spacer(),
-          ],
+          ),
         ),
       ),
     );
