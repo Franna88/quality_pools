@@ -57,12 +57,21 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     try {
-      // Create user in Firebase Auth
+      // Print debug info
+      print(
+          "Attempting to register with email: ${_emailController.text.trim()}");
+
+      // Add a delay to ensure Firebase is ready
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      // Create user in Firebase Auth (simple email/password registration)
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
+      print("Registration successful. User ID: ${userCredential.user?.uid}");
 
       // Get Auth uid
       String userId = userCredential.user?.uid ?? '';
@@ -82,6 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
           .doc(userId)
           .set(userData);
 
+      print("User data saved to Firestore successfully");
+
       if (mounted) {
         // Navigate to the next screen
         Navigator.pushReplacement(
@@ -92,6 +103,8 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       }
     } on FirebaseAuthException catch (e) {
+      print(
+          "Firebase Auth Exception during registration: ${e.code} - ${e.message}");
       String message;
       switch (e.code) {
         case 'email-already-in-use':
@@ -107,14 +120,15 @@ class _RegisterPageState extends State<RegisterPage> {
           message = 'Email/password accounts are not enabled.';
           break;
         default:
-          message = 'An error occurred. Please try again.';
+          message = 'Error: ${e.message}';
       }
       setState(() {
         _errorMessage = message;
       });
     } catch (e) {
+      print("General Exception during registration: $e");
       setState(() {
-        _errorMessage = 'An error occurred. Please try again.';
+        _errorMessage = 'An error occurred. Please try again. Details: $e';
       });
     } finally {
       if (mounted) {
